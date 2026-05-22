@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+* { box-sizing: border-box; }
+
+/* ── Dark theme (default) ── */
+:root, [data-theme="dark"] {
+  --bg:        #0a0a0a;
+  --surface:   #0d0d0d;
+  --surface2:  #111111;
+  --border:    #1a1a1a;
+  --border2:   #1f1f1f;
+  --muted:     #2a2a2a;
+  --subtle:    #444444;
+  --dim:       #555555;
+  --text-sec:  #888888;
+  --text:      #e8e8e8;
+  --text-inv:  #000000;
+  --btn-bg:    #ffffff;
+  --btn-hover: #e8e8e8;
+  --scrollbar-track: #111;
+  --scrollbar-thumb: #333;
+}
+
+/* ── Light theme ── */
+[data-theme="light"] {
+  --bg:        #f5f5f5;
+  --surface:   #ffffff;
+  --surface2:  #f0f0f0;
+  --border:    #e0e0e0;
+  --border2:   #d4d4d4;
+  --muted:     #cccccc;
+  --subtle:    #999999;
+  --dim:       #777777;
+  --text-sec:  #555555;
+  --text:      #111111;
+  --text-inv:  #ffffff;
+  --btn-bg:    #111111;
+  --btn-hover: #333333;
+  --scrollbar-track: #eee;
+  --scrollbar-thumb: #bbb;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 2px; }
+
+/* ── Utility classes using CSS vars ── */
+.t-bg       { background-color: var(--bg); }
+.t-surface  { background-color: var(--surface); }
+.t-surface2 { background-color: var(--surface2); }
+.t-border   { border-color: var(--border); }
+.t-border2  { border-color: var(--border2); }
+.t-text     { color: var(--text); }
+.t-text-sec { color: var(--text-sec); }
+.t-dim      { color: var(--dim); }
+.t-subtle   { color: var(--subtle); }
+.t-btn      { background-color: var(--btn-bg); color: var(--text-inv); }
+.t-btn:hover { background-color: var(--btn-hover); }
+
+.mono { font-family: 'JetBrains Mono', monospace; }

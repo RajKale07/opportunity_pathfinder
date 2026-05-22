@@ -1,0 +1,21 @@
+# Dependencies
+frontend/node_modules/
+backend/target/
+
+# Uploads folder (user files)
+backend/uploads/
+
+# Environment / secrets
+backend/src/main/resources/application.properties
+
+# Maven zip
+maven.zip
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+*.iml
+.vscode/
