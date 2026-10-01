@@ -58,40 +58,40 @@ export const TaskWorkbenchPage: React.FC = () => {
   });
 
   return (
-    <div className="space-y-6">
-      <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-1 shadow-xl">
-        <div className="flex items-center space-x-2 text-xs font-semibold text-emerald-400 uppercase tracking-wider">
-          <CheckSquare className="w-4 h-4" />
+    <div className="space-y-5 text-[#eff1f6]">
+      <div className="bg-[#262626] border border-[#333333] rounded p-4 space-y-1">
+        <div className="flex items-center space-x-2 text-xs font-semibold text-[#ffa116] uppercase tracking-wider">
+          <CheckSquare className="w-3.5 h-3.5" />
           <span>Evidence-Based Task Execution</span>
         </div>
-        <h1 className="text-xl font-extrabold text-white">Task Workbench & Proof Submission</h1>
-        <p className="text-xs text-slate-400 max-w-2xl leading-relaxed">
+        <h1 className="text-lg font-bold text-[#eff1f6]">Task Workbench & Proof Submission</h1>
+        <p className="text-xs text-[#9ca3af] max-w-2xl leading-relaxed">
           Submit verifiable repository links, notes, or lab test outcomes. Completing tasks with evidence directly advances your skill proficiencies and updates the Student Digital Twin.
         </p>
       </div>
 
       {successMsg && (
-        <div className="p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-xs text-emerald-400 flex items-center justify-between">
+        <div className="p-3 bg-[#262626] border border-[#2cbb5d]/40 rounded text-xs text-[#eff1f6] flex items-center justify-between">
           <span className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4" />
+            <CheckCircle2 className="w-4 h-4 text-[#2cbb5d]" />
             {successMsg}
           </span>
-          <button onClick={() => setSuccessMsg(null)} className="text-slate-400 hover:text-white text-xs">
+          <button onClick={() => setSuccessMsg(null)} className="text-[#9ca3af] hover:text-white text-xs">
             Dismiss
           </button>
         </div>
       )}
 
       {/* Filter Tabs */}
-      <div className="flex space-x-2">
+      <div className="flex space-x-1.5">
         {['ALL', 'NOT_STARTED', 'IN_PROGRESS', 'COMPLETED'].map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            className={`px-3 py-1 rounded text-xs font-medium transition-colors ${
               filter === f
-                ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20'
-                : 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800'
+                ? 'bg-[#333333] text-[#eff1f6] border border-[#444444]'
+                : 'text-[#9ca3af] hover:text-[#eff1f6] hover:bg-[#262626]'
             }`}
           >
             {f.replace('_', ' ')}
@@ -100,131 +100,138 @@ export const TaskWorkbenchPage: React.FC = () => {
       </div>
 
       {loading ? (
-        <div className="flex h-64 items-center justify-center space-x-3 text-slate-400">
-          <div className="w-5 h-5 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
-          <span className="text-sm font-medium">Loading assigned tasks...</span>
+        <div className="flex h-64 items-center justify-center space-x-3 text-[#9ca3af]">
+          <div className="w-5 h-5 border-2 border-[#ffa116] border-t-transparent rounded-full animate-spin"></div>
+          <span className="text-xs">Loading tasks...</span>
         </div>
       ) : filteredTasks.length === 0 ? (
-        <div className="p-12 text-center bg-slate-900 border border-slate-800 rounded-2xl text-xs text-slate-400">
+        <div className="p-8 text-center bg-[#262626] border border-[#333333] rounded text-xs text-[#9ca3af]">
           No tasks found matching filter "{filter}".
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {filteredTasks.map((t) => (
-            <div
-              key={t.id}
-              className="p-5 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col justify-between space-y-4 hover:border-slate-700 transition-colors"
-            >
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                    {t.skillName || 'Capstone'}
-                  </span>
-                  <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded ${
-                    t.status === 'COMPLETED' ? 'bg-emerald-500/20 text-emerald-400' :
-                    t.status === 'IN_PROGRESS' ? 'bg-indigo-500/20 text-indigo-400' : 'bg-slate-800 text-slate-400'
-                  }`}>
-                    {t.status}
-                  </span>
+        /* LeetCode Problem List Table */
+        <div className="bg-[#262626] border border-[#333333] rounded overflow-hidden">
+          <div className="grid grid-cols-12 px-4 py-2.5 bg-[#202020] border-b border-[#333333] text-[11px] font-semibold text-[#9ca3af] uppercase tracking-wider">
+            <div className="col-span-1">Status</div>
+            <div className="col-span-6">Task Title</div>
+            <div className="col-span-2">Skill Domain</div>
+            <div className="col-span-1 text-center">Hours</div>
+            <div className="col-span-2 text-right">Action</div>
+          </div>
+
+          <div className="divide-y divide-[#333333]">
+            {filteredTasks.map((t) => (
+              <div
+                key={t.id}
+                className="grid grid-cols-12 px-4 py-3 hover:bg-[#2c2c2c] transition-colors items-center text-xs"
+              >
+                <div className="col-span-1">
+                  {t.status === 'COMPLETED' ? (
+                    <span className="text-[#2cbb5d] font-mono text-[11px] flex items-center gap-1">
+                      <CheckCircle2 className="w-3.5 h-3.5" /> Done
+                    </span>
+                  ) : t.status === 'IN_PROGRESS' ? (
+                    <span className="text-[#ffa116] font-mono text-[11px]">Active</span>
+                  ) : (
+                    <span className="text-[#71717a] font-mono text-[11px]">Todo</span>
+                  )}
                 </div>
 
-                <h3 className="text-sm font-bold text-white">{t.title}</h3>
-                <p className="text-xs text-slate-400 leading-relaxed">{t.description}</p>
-              </div>
-
-              <div className="space-y-3 pt-2 border-t border-slate-800/80">
-                <div className="flex items-center justify-between text-xs text-slate-400">
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5 text-slate-500" />
-                    Est: {t.estimatedHours}h
-                  </span>
-                  <span>Priority: <strong className="text-white">{t.priority}</strong></span>
-                </div>
-
-                {t.evidences && t.evidences.length > 0 && (
-                  <div className="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800 space-y-1">
-                    <div className="text-[10px] font-bold text-slate-400 uppercase">Submitted Evidence:</div>
+                <div className="col-span-6 pr-4">
+                  <div className="font-medium text-[#eff1f6] hover:text-[#ffa116] cursor-pointer">{t.title}</div>
+                  <div className="text-[11px] text-[#9ca3af] truncate">{t.description}</div>
+                  {t.evidences && t.evidences.length > 0 && (
                     <a
                       href={t.evidences[0].urlOrReference}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-xs text-emerald-400 hover:underline flex items-center gap-1 truncate"
+                      className="text-[10px] text-[#ffa116] hover:underline flex items-center gap-1 mt-0.5"
                     >
-                      <Github className="w-3 h-3 flex-shrink-0" />
+                      <Github className="w-2.5 h-2.5" />
                       <span className="truncate">{t.evidences[0].urlOrReference}</span>
                     </a>
-                  </div>
-                )}
+                  )}
+                </div>
 
-                {t.status !== 'COMPLETED' ? (
-                  <button
-                    onClick={() => {
-                      setActiveTask(t);
-                      setEvidenceUrl('https://github.com/alexchen-dev/sql-joins-practice');
-                      setEvidenceNotes('Implemented indexing benchmarks and optimized multi-table joins.');
-                    }}
-                    className="w-full py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold flex items-center justify-center space-x-1.5 transition-colors"
-                  >
-                    <UploadCloud className="w-3.5 h-3.5" />
-                    <span>Submit Evidence & Complete</span>
-                  </button>
-                ) : (
-                  <div className="text-center text-xs text-emerald-400 font-semibold flex items-center justify-center gap-1">
-                    <CheckCircle2 className="w-3.5 h-3.5" />
-                    <span>Verified Milestone Completed</span>
-                  </div>
-                )}
+                <div className="col-span-2">
+                  <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-[#333333] text-[#eff1f6]">
+                    {t.skillName || 'Capstone'}
+                  </span>
+                </div>
+
+                <div className="col-span-1 text-center font-mono text-[11px] text-[#9ca3af]">
+                  {t.estimatedHours}h
+                </div>
+
+                <div className="col-span-2 text-right">
+                  {t.status !== 'COMPLETED' ? (
+                    <button
+                      onClick={() => {
+                        setActiveTask(t);
+                        setEvidenceUrl('https://github.com/alexchen-dev/sql-joins-practice');
+                        setEvidenceNotes('Implemented indexing benchmarks and optimized multi-table joins.');
+                      }}
+                      className="px-2.5 py-1 bg-[#333333] hover:bg-[#ffa116] hover:text-black text-[#eff1f6] rounded text-xs font-medium transition-colors"
+                    >
+                      Submit Proof
+                    </button>
+                  ) : (
+                    <span className="text-[11px] text-[#2cbb5d] font-mono font-medium">Verified ✓</span>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       )}
 
-      {/* Submit Evidence Modal */}
+      {/* Submit Evidence Modal (LeetCode Dark Dialog) */}
       {activeTask && (
-        <div className="fixed inset-0 bg-black/75 flex items-center justify-center p-4 z-50">
-          <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl max-w-md w-full space-y-4 shadow-2xl">
-            <h3 className="text-sm font-bold text-white">Submit Evidence for: {activeTask.title}</h3>
-            <p className="text-xs text-slate-400">
-              Attach link to public GitHub repository or test outcome. Submitting valid evidence updates proficiency by +15%.
-            </p>
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
+          <div className="bg-[#262626] border border-[#333333] p-5 rounded max-w-md w-full space-y-4 shadow-xl text-[#eff1f6]">
+            <div>
+              <h3 className="text-sm font-semibold text-[#eff1f6]">Submit Proof: {activeTask.title}</h3>
+              <p className="text-xs text-[#9ca3af] mt-0.5">
+                Attach public GitHub repository or verifiable artifact to complete this milestone.
+              </p>
+            </div>
 
-            <form onSubmit={handleSubmitEvidence} className="space-y-4">
+            <form onSubmit={handleSubmitEvidence} className="space-y-3.5">
               <div>
-                <label className="text-xs font-semibold text-slate-300 block mb-1">GitHub Repository or Project Link</label>
+                <label className="text-xs text-[#9ca3af] block mb-1">GitHub Repository or Project Link</label>
                 <input
                   type="url"
                   required
                   value={evidenceUrl}
                   onChange={(e) => setEvidenceUrl(e.target.value)}
                   placeholder="https://github.com/username/project-repo"
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+                  className="w-full bg-[#1e1e1e] border border-[#333333] rounded px-3 py-1.5 text-xs text-[#eff1f6] placeholder-[#666666] focus:outline-none focus:border-[#ffa116]"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-300 block mb-1">Implementation Notes & Findings</label>
+                <label className="text-xs text-[#9ca3af] block mb-1">Implementation Notes & Findings</label>
                 <textarea
                   rows={3}
                   value={evidenceNotes}
                   onChange={(e) => setEvidenceNotes(e.target.value)}
                   placeholder="Document key trade-offs, algorithms used, and test metrics..."
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+                  className="w-full bg-[#1e1e1e] border border-[#333333] rounded px-3 py-1.5 text-xs text-[#eff1f6] placeholder-[#666666] focus:outline-none focus:border-[#ffa116]"
                 />
               </div>
 
-              <div className="flex space-x-2 pt-2">
+              <div className="flex space-x-2 pt-1">
                 <button
                   type="button"
                   onClick={() => setActiveTask(null)}
-                  className="flex-1 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold"
+                  className="flex-1 py-1.5 rounded bg-[#333333] hover:bg-[#3e3e3e] text-[#eff1f6] text-xs font-medium"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="flex-1 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-semibold"
+                  className="flex-1 py-1.5 rounded bg-[#ffa116] hover:bg-[#e08e14] text-black text-xs font-semibold"
                 >
                   {submitting ? 'Verifying...' : 'Submit & Update Twin'}
                 </button>

@@ -48,97 +48,95 @@ export const RoadmapPage: React.FC = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5 text-[#eff1f6]">
       {/* Header Banner */}
-      <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xl">
+      <div className="bg-[#262626] border border-[#333333] rounded p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
-          <div className="flex items-center space-x-2 text-xs font-semibold text-emerald-400 uppercase tracking-wider">
-            <Map className="w-4 h-4" />
+          <div className="flex items-center space-x-2 text-xs font-semibold text-[#ffa116] uppercase tracking-wider">
+            <Map className="w-3.5 h-3.5" />
             <span>Closed-Loop Personalized Roadmap</span>
           </div>
-          <h1 className="text-xl font-extrabold text-white">{plan.title}</h1>
-          <p className="text-xs text-slate-400 max-w-2xl leading-relaxed">{plan.objective}</p>
+          <h1 className="text-lg font-bold text-[#eff1f6]">{plan.title}</h1>
+          <p className="text-xs text-[#9ca3af] max-w-2xl leading-relaxed">{plan.objective}</p>
         </div>
 
-        <div className="flex items-center space-x-3 bg-slate-950/60 px-4 py-2.5 rounded-xl border border-slate-800 text-xs">
+        <div className="flex items-center space-x-3 bg-[#1e1e1e] px-3 py-1.5 rounded border border-[#333333] text-xs">
           <div>
-            Plan Version: <strong className="text-emerald-400">v{plan.version}</strong>
+            Version: <strong className="text-[#ffa116] font-mono">v{plan.version}</strong>
           </div>
-          <span className="text-slate-600">•</span>
+          <span className="text-[#444444]">|</span>
           <div>
-            Status: <strong className="text-white">{plan.status}</strong>
+            Status: <strong className="text-[#eff1f6] font-mono">{plan.status}</strong>
           </div>
         </div>
       </div>
 
       {/* Sequential Phases */}
-      <div className="space-y-6">
+      <div className="space-y-4">
         {plan.phases?.map((phase: any) => (
           <div
             key={phase.id}
-            className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4 shadow-xl"
+            className="bg-[#262626] border border-[#333333] rounded overflow-hidden"
           >
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-800">
+            <div className="px-4 py-3 bg-[#222222] border-b border-[#333333] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div className="space-y-0.5">
                 <div className="flex items-center space-x-2">
-                  <span className="text-xs font-extrabold text-emerald-400 px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">
+                  <span className="text-[10px] font-mono font-semibold text-black px-1.5 py-0.2 rounded bg-[#ffa116]">
                     Phase {phase.phaseOrder}
                   </span>
-                  <h3 className="text-base font-bold text-white">{phase.title}</h3>
+                  <h3 className="text-xs font-semibold text-[#eff1f6]">{phase.title}</h3>
                 </div>
-                <p className="text-xs text-slate-400">{phase.description}</p>
+                <p className="text-[11px] text-[#9ca3af]">{phase.description}</p>
               </div>
 
-              <div className="flex items-center space-x-3 text-xs text-slate-400 flex-shrink-0">
-                <span className="flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5 text-slate-500" />
+              <div className="flex items-center space-x-3 text-xs text-[#9ca3af] flex-shrink-0">
+                <span className="flex items-center gap-1 font-mono text-[11px]">
+                  <Clock className="w-3 h-3 text-[#71717a]" />
                   {phase.durationWeeks} Weeks
                 </span>
-                <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
-                  phase.status === 'COMPLETED' ? 'bg-emerald-500/20 text-emerald-400' :
-                  phase.status === 'IN_PROGRESS' ? 'bg-indigo-500/20 text-indigo-400' :
-                  'bg-slate-800 text-slate-400'
+                <span className={`px-2 py-0.5 rounded text-[10px] font-mono ${
+                  phase.status === 'COMPLETED' ? 'bg-[#2cbb5d]/10 text-[#2cbb5d]' :
+                  phase.status === 'IN_PROGRESS' ? 'bg-[#ffa116]/10 text-[#ffa116]' :
+                  'bg-[#333333] text-[#9ca3af]'
                 }`}>
                   {phase.status}
                 </span>
               </div>
             </div>
 
-            {/* Tasks inside this Phase */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+            {/* Tasks inside this Phase (LeetCode Problem List Style) */}
+            <div className="divide-y divide-[#333333]">
               {phase.tasks?.map((task: any) => (
                 <div
                   key={task.id}
-                  className="p-4 rounded-xl bg-slate-950/60 border border-slate-800/80 hover:border-slate-700 transition-all flex flex-col justify-between space-y-3"
+                  className="p-3.5 hover:bg-[#2c2c2c] transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs"
                 >
-                  <div className="space-y-1.5">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-slate-800 text-slate-300">
-                        {task.skillName || 'Applied Capstone'}
+                  <div className="space-y-1 min-w-0">
+                    <div className="flex items-center space-x-2">
+                      <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-[#333333] text-[#9ca3af]">
+                        {task.skillName || 'Applied'}
                       </span>
-                      <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded ${
-                        task.status === 'COMPLETED' ? 'bg-emerald-500/20 text-emerald-400' :
-                        task.status === 'IN_PROGRESS' ? 'bg-indigo-500/20 text-indigo-400' :
-                        'bg-slate-800 text-slate-400'
+                      <h4 className="text-xs font-medium text-[#eff1f6] truncate">{task.title}</h4>
+                      <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded ${
+                        task.status === 'COMPLETED' ? 'bg-[#2cbb5d]/10 text-[#2cbb5d]' :
+                        task.status === 'IN_PROGRESS' ? 'bg-[#ffa116]/10 text-[#ffa116]' :
+                        'bg-[#333333] text-[#9ca3af]'
                       }`}>
                         {task.status}
                       </span>
                     </div>
-
-                    <h4 className="text-xs font-bold text-slate-200">{task.title}</h4>
-                    <p className="text-[11px] text-slate-400 leading-relaxed">{task.description}</p>
+                    <p className="text-[11px] text-[#9ca3af] line-clamp-1">{task.description}</p>
                   </div>
 
-                  <div className="flex items-center justify-between pt-2 border-t border-slate-800/60 text-xs">
-                    <span className="text-[10px] text-slate-500">
-                      Difficulty: {task.difficulty}/5 • Est: {task.estimatedHours}h
+                  <div className="flex items-center space-x-4 flex-shrink-0">
+                    <span className="text-[10px] text-[#71717a] font-mono">
+                      Diff: {task.difficulty}/5 • {task.estimatedHours}h
                     </span>
                     <Link
                       to="/tasks"
-                      className="text-xs font-semibold text-emerald-400 hover:text-emerald-300 flex items-center gap-1"
+                      className="px-2.5 py-1 rounded bg-[#333333] hover:bg-[#ffa116] hover:text-black text-[#eff1f6] text-xs font-medium transition-colors"
                     >
-                      {task.status === 'COMPLETED' ? 'View Evidence' : 'Execute & Submit'}
-                      <ArrowRight className="w-3 h-3" />
+                      {task.status === 'COMPLETED' ? 'Evidence' : 'Execute'}
                     </Link>
                   </div>
                 </div>

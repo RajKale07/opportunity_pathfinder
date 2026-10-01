@@ -39,79 +39,79 @@ export const CareerPathsPage: React.FC = () => {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-1 shadow-xl">
-        <div className="flex items-center space-x-2 text-xs font-semibold text-emerald-400 uppercase tracking-wider">
-          <Compass className="w-4 h-4" />
+    <div className="space-y-5 text-[#eff1f6]">
+      <div className="bg-[#262626] border border-[#333333] rounded p-4 space-y-1">
+        <div className="flex items-center space-x-2 text-xs font-semibold text-[#ffa116] uppercase tracking-wider">
+          <Compass className="w-3.5 h-3.5" />
           <span>Multi-Path Career Optimization</span>
         </div>
-        <h1 className="text-xl font-extrabold text-white">Target Career Paths & Alignment Scores</h1>
-        <p className="text-xs text-slate-400 max-w-2xl leading-relaxed">
-          Opportunity Pathfinder does not pigeonhole you into a single destination. Compare primary, alternative, and exploratory roles evaluated across transparent alignment factors.
+        <h1 className="text-lg font-bold text-[#eff1f6]">Target Career Paths & Alignment Scores</h1>
+        <p className="text-xs text-[#9ca3af] max-w-2xl leading-relaxed">
+          Compare primary, alternative, and exploratory roles evaluated across transparent alignment factors and objective skill gap algorithms.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {recommendations.map((path) => (
           <div
             key={path.careerPathId}
-            className="p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-slate-700 transition-all flex flex-col justify-between space-y-5 shadow-xl relative overflow-hidden"
+            className="bg-[#262626] border border-[#333333] hover:border-[#444444] rounded p-4 transition-colors flex flex-col justify-between space-y-4"
           >
-            <div className="space-y-4">
-              <div className="flex items-start justify-between">
+            <div className="space-y-3">
+              <div className="flex items-start justify-between pb-2 border-b border-[#333333]">
                 <div>
-                  <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">{path.domain}</span>
-                  <h3 className="text-lg font-bold text-white mt-0.5">{path.title}</h3>
+                  <span className="text-[10px] text-[#9ca3af] uppercase font-mono tracking-wider">{path.domain}</span>
+                  <h3 className="text-sm font-semibold text-[#eff1f6] mt-0.5">{path.title}</h3>
                 </div>
                 <div className="text-right">
-                  <div className="text-2xl font-extrabold text-emerald-400">{path.overallMatchScore}%</div>
-                  <span className="text-[10px] text-slate-500 font-semibold uppercase">Overall Match</span>
+                  <div className="text-xl font-bold font-mono text-[#2cbb5d]">{path.overallMatchScore}%</div>
+                  <span className="text-[10px] text-[#9ca3af] uppercase">Match</span>
                 </div>
               </div>
 
-              {/* Transparent Factor Breakdown (Section 10 Formula) */}
-              <div className="space-y-2 p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80 text-xs">
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
-                  Alignment Factor Matrix:
+              {/* Transparent Factor Breakdown */}
+              <div className="space-y-1.5 p-3 rounded bg-[#202020] border border-[#2d2d2d] text-xs">
+                <span className="text-[10px] font-semibold text-[#9ca3af] uppercase tracking-wider block mb-1">
+                  Alignment Matrix:
                 </span>
-                <div className="flex justify-between items-center text-slate-300">
-                  <span className="text-slate-400">Skill Proficiency Alignment (30%):</span>
-                  <span className="font-semibold text-white">{path.skillAlignment}%</span>
+                <div className="flex justify-between items-center text-[11px] text-[#9ca3af]">
+                  <span>Skill Alignment (30%):</span>
+                  <span className="font-mono text-[#eff1f6]">{path.skillAlignment}%</span>
                 </div>
-                <div className="flex justify-between items-center text-slate-300">
-                  <span className="text-slate-400">Domain Interest Alignment (20%):</span>
-                  <span className="font-semibold text-white">{path.interestAlignment}%</span>
+                <div className="flex justify-between items-center text-[11px] text-[#9ca3af]">
+                  <span>Domain Interest (20%):</span>
+                  <span className="font-mono text-[#eff1f6]">{path.interestAlignment}%</span>
                 </div>
-                <div className="flex justify-between items-center text-slate-300">
-                  <span className="text-slate-400">Portfolio Project Evidence (15%):</span>
-                  <span className="font-semibold text-white">{path.projectAlignment}%</span>
+                <div className="flex justify-between items-center text-[11px] text-[#9ca3af]">
+                  <span>Project Portfolio (15%):</span>
+                  <span className="font-mono text-[#eff1f6]">{path.projectAlignment}%</span>
                 </div>
-                <div className="flex justify-between items-center text-slate-300">
-                  <span className="text-slate-400">Academic Background (10%):</span>
-                  <span className="font-semibold text-white">{path.academicAlignment}%</span>
+                <div className="flex justify-between items-center text-[11px] text-[#9ca3af]">
+                  <span>Academic Background (10%):</span>
+                  <span className="font-mono text-[#eff1f6]">{path.academicAlignment}%</span>
                 </div>
-                <div className="flex justify-between items-center text-slate-300">
-                  <span className="text-slate-400">Opportunity Market Fit (10%):</span>
-                  <span className="font-semibold text-white">{path.opportunityAlignment}%</span>
+                <div className="flex justify-between items-center text-[11px] text-[#9ca3af]">
+                  <span>Market Fit (10%):</span>
+                  <span className="font-mono text-[#eff1f6]">{path.opportunityAlignment}%</span>
                 </div>
               </div>
 
               {/* Rationale Narrative */}
-              <div className="text-xs text-slate-400 leading-relaxed italic bg-slate-950/30 p-3 rounded-lg border border-slate-800/50">
+              <div className="text-[11px] text-[#9ca3af] leading-relaxed italic bg-[#202020] p-2.5 rounded border border-[#2d2d2d]">
                 "{path.matchRationale}"
               </div>
 
               {/* Top Gaps */}
               {path.topSkillGaps && path.topSkillGaps.length > 0 && (
-                <div className="space-y-1.5">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                <div className="space-y-1">
+                  <span className="text-[10px] font-semibold text-[#9ca3af] uppercase tracking-wider">
                     Key Competency Gaps:
                   </span>
                   <div className="space-y-1">
                     {path.topSkillGaps.map((g: any) => (
-                      <div key={g.skillId} className="flex justify-between items-center text-xs p-2 rounded-lg bg-slate-950/40 border border-slate-800">
-                        <span className="text-slate-300 font-medium">{g.skillName}</span>
-                        <span className="text-rose-400 font-semibold text-[11px]">
+                      <div key={g.skillId} className="flex justify-between items-center text-[11px] p-1.5 rounded bg-[#202020] border border-[#2d2d2d]">
+                        <span className="text-[#eff1f6]">{g.skillName}</span>
+                        <span className="text-[#ef4743] font-mono text-[10px]">
                           {g.currentProficiency}% → {g.requiredProficiency}%
                         </span>
                       </div>
@@ -124,10 +124,10 @@ export const CareerPathsPage: React.FC = () => {
             <button
               onClick={() => handleSelectPathAndGenerateRoadmap(path.careerPathId)}
               disabled={generatingId === path.careerPathId}
-              className="w-full py-2.5 bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 text-white rounded-xl text-xs font-semibold flex items-center justify-center space-x-2 transition-all shadow-lg shadow-emerald-500/20"
+              className="w-full py-2 bg-[#ffa116] hover:bg-[#e08e14] disabled:opacity-50 text-black rounded text-xs font-semibold flex items-center justify-center space-x-1.5 transition-colors shadow-sm"
             >
-              <span>{generatingId === path.careerPathId ? 'Generating Roadmap...' : 'Select Path & Generate Roadmap'}</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>{generatingId === path.careerPathId ? 'Generating...' : 'Select Path & Generate Roadmap'}</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
         ))}
