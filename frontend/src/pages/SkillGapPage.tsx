@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { careersApi, skillGapsApi } from '../api/client';
-import { Target, AlertCircle, CheckCircle2, ShieldAlert, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Target, AlertCircle, ShieldAlert, ArrowRight } from 'lucide-react';
 
 export const SkillGapPage: React.FC = () => {
   const [careers, setCareers] = useState<any[]>([]);
@@ -29,105 +29,115 @@ export const SkillGapPage: React.FC = () => {
   }, [selectedCareerId]);
 
   return (
-    <div className="space-y-6">
-      <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-1 shadow-xl">
-        <div className="flex items-center space-x-2 text-xs font-semibold text-emerald-400 uppercase tracking-wider">
-          <Target className="w-4 h-4" />
-          <span>Skill Gap Engine</span>
+    <div className="space-y-4">
+      {/* Header */}
+      <div className="bg-[#262626] border border-[#333333] rounded px-5 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <div className="flex items-center space-x-2 text-[11px] font-mono text-[#ffa116]">
+            <Target className="w-3.5 h-3.5" />
+            <span>SKILL GAP DIAGNOSTIC ENGINE</span>
+          </div>
+          <h1 className="text-base font-semibold text-[#eff1f6] mt-0.5">Prerequisite & Competency Gap Diagnosis</h1>
+          <p className="text-xs text-[#9ca3af] mt-0.5">
+            Compare target industry role standards against your current Student Digital Twin to pinpoint gaps.
+          </p>
         </div>
-        <h1 className="text-xl font-extrabold text-white">Prerequisite & Competency Gap Diagnosis</h1>
-        <p className="text-xs text-slate-400 max-w-2xl leading-relaxed">
-          The Skill Gap Engine compares target career standards against your current Student Digital Twin, identifying missing competencies, prerequisite blockers, and priority levels.
-        </p>
       </div>
 
-      {/* Career Selector Tabs */}
-      <div className="flex space-x-2 overflow-x-auto pb-1">
-        {careers.map((c) => (
-          <button
-            key={c.id}
-            onClick={() => setSelectedCareerId(c.id)}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
-              selectedCareerId === c.id
-                ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20'
-                : 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800'
-            }`}
-          >
-            {c.title}
-          </button>
-        ))}
+      {/* Role Filter Tabs (LeetCode Tag Style) */}
+      <div className="flex items-center space-x-1.5 overflow-x-auto pb-1">
+        {careers.map((c) => {
+          const isSelected = selectedCareerId === c.id;
+          return (
+            <button
+              key={c.id}
+              onClick={() => setSelectedCareerId(c.id)}
+              className={`px-3 py-1.5 rounded text-xs whitespace-nowrap transition-colors ${
+                isSelected
+                  ? 'bg-[#ffa116] text-black font-semibold'
+                  : 'bg-[#262626] text-[#9ca3af] hover:text-[#eff1f6] border border-[#333333]'
+              }`}
+            >
+              {c.title}
+            </button>
+          );
+        })}
       </div>
 
       {loading ? (
-        <div className="flex h-64 items-center justify-center space-x-3 text-slate-400">
-          <div className="w-5 h-5 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
-          <span className="text-sm font-medium">Computing gap matrix & blocker chains...</span>
+        <div className="flex h-64 items-center justify-center space-x-2 text-[#9ca3af]">
+          <div className="w-4 h-4 border-2 border-[#ffa116] border-t-transparent rounded-full animate-spin"></div>
+          <span className="text-xs font-mono">Computing gap matrix & blocker chains...</span>
         </div>
       ) : gapReport ? (
-        <div className="space-y-5">
+        <div className="space-y-4">
           {/* Summary Strip */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
-            <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
-              <span className="text-[11px] text-slate-400">Required Skills</span>
-              <div className="text-xl font-bold text-white">{gapReport.totalRequiredSkills}</div>
+          <div className="bg-[#262626] border border-[#333333] rounded grid grid-cols-2 sm:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#333333]">
+            <div className="p-3.5">
+              <span className="text-[11px] font-mono text-[#9ca3af]">Required Skills</span>
+              <div className="text-lg font-bold font-mono text-[#eff1f6] mt-0.5">{gapReport.totalRequiredSkills}</div>
             </div>
-            <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
-              <span className="text-[11px] text-slate-400">Target Standard Met</span>
-              <div className="text-xl font-bold text-emerald-400">{gapReport.readySkillsCount} Ready</div>
+            <div className="p-3.5">
+              <span className="text-[11px] font-mono text-[#9ca3af]">Target Met</span>
+              <div className="text-lg font-bold font-mono text-[#2cbb5d] mt-0.5">{gapReport.readySkillsCount} Ready</div>
             </div>
-            <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
-              <span className="text-[11px] text-slate-400">Identified Gaps</span>
-              <div className="text-xl font-bold text-rose-400">{gapReport.gapSkillsCount} Gaps</div>
+            <div className="p-3.5">
+              <span className="text-[11px] font-mono text-[#9ca3af]">Identified Gaps</span>
+              <div className="text-lg font-bold font-mono text-[#ef4743] mt-0.5">{gapReport.gapSkillsCount} Gaps</div>
             </div>
-            <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
-              <span className="text-[11px] text-slate-400">Avg Deficit</span>
-              <div className="text-xl font-bold text-white">{gapReport.averageGapPercentage}%</div>
+            <div className="p-3.5">
+              <span className="text-[11px] font-mono text-[#9ca3af]">Avg Deficit</span>
+              <div className="text-lg font-bold font-mono text-[#eff1f6] mt-0.5">{gapReport.averageGapPercentage}%</div>
             </div>
           </div>
 
-          {/* Gaps List */}
-          <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
-            <h3 className="text-sm font-bold text-white">Skill Gap Breakdown for {gapReport.careerPathTitle}</h3>
+          {/* Gaps List in LeetCode Table Style */}
+          <div className="bg-[#262626] border border-[#333333] rounded overflow-hidden">
+            <div className="px-4 py-2.5 border-b border-[#333333] flex items-center justify-between">
+              <span className="text-xs font-semibold text-[#eff1f6]">
+                Competency Discrepancies for {gapReport.careerPathTitle}
+              </span>
+              <span className="text-[11px] font-mono text-[#9ca3af]">Ranked by Severity</span>
+            </div>
 
-            <div className="space-y-3">
-              {gapReport.gaps?.map((g: any) => (
-                <div
-                  key={g.skillId}
-                  className={`p-4 rounded-xl border transition-all ${
-                    g.priority === 'HIGH' ? 'bg-rose-950/20 border-rose-500/30' :
-                    g.priority === 'MEDIUM' ? 'bg-amber-950/20 border-amber-500/30' :
-                    g.priority === 'LOW' ? 'bg-indigo-950/20 border-indigo-500/30' :
-                    'bg-slate-950/60 border-slate-800'
-                  }`}
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-                    <div className="flex items-center space-x-2.5">
-                      <span className="text-sm font-bold text-white">{g.skillName}</span>
-                      <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded ${
-                        g.priority === 'HIGH' ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30' :
-                        g.priority === 'MEDIUM' ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' :
-                        g.priority === 'LOW' ? 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/30' :
-                        'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-                      }`}>
-                        Priority: {g.priority}
-                      </span>
-                      {g.isPrerequisiteBlocker && (
-                        <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-rose-500 text-white flex items-center gap-1">
-                          <ShieldAlert className="w-3 h-3" /> Prerequisite Blocker
+            <div className="divide-y divide-[#333333]">
+              {gapReport.gaps?.map((g: any) => {
+                const isHigh = g.priority === 'HIGH';
+                const isMed = g.priority === 'MEDIUM';
+                return (
+                  <div key={g.skillId} className="p-4 hover:bg-[#2e2e2e] transition-colors space-y-2">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                      <div className="flex items-center space-x-2">
+                        <span className="text-xs font-semibold text-[#eff1f6]">{g.skillName}</span>
+                        <span
+                          className={`text-[10px] font-mono uppercase px-2 py-0.5 rounded ${
+                            isHigh
+                              ? 'text-[#ef4743] bg-[#ef4743]/10 border border-[#ef4743]/30'
+                              : isMed
+                              ? 'text-[#ffc01e] bg-[#ffc01e]/10 border border-[#ffc01e]/30'
+                              : 'text-[#9ca3af] bg-[#333333]'
+                          }`}
+                        >
+                          {g.priority}
                         </span>
-                      )}
+                        {g.isPrerequisiteBlocker && (
+                          <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-[#ef4743] text-white flex items-center gap-1">
+                            <ShieldAlert className="w-2.5 h-2.5" /> Prereq Blocker
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="text-xs font-mono text-[#9ca3af]">
+                        Current: <span className="text-[#eff1f6]">{g.currentProficiency}%</span> • Target:{' '}
+                        <span className="text-[#eff1f6]">{g.requiredProficiency}%</span> • Gap:{' '}
+                        <span className="text-[#ef4743]">-{g.gapValue}%</span>
+                      </div>
                     </div>
 
-                    <div className="text-xs text-slate-300">
-                      Current: <strong className="text-white">{g.currentProficiency}%</strong> • Target:{' '}
-                      <strong className="text-white">{g.requiredProficiency}%</strong> • Gap:{' '}
-                      <strong className="text-rose-400">-{g.gapValue}%</strong>
-                    </div>
+                    <p className="text-xs text-[#9ca3af] leading-relaxed">{g.actionRecommendation}</p>
                   </div>
-
-                  <p className="text-xs text-slate-400 leading-relaxed">{g.actionRecommendation}</p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

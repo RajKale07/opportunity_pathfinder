@@ -46,97 +46,117 @@ export const DigitalTwinPage: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5 text-[#eff1f6]">
       {/* Header Banner */}
-      <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xl">
+      <div className="bg-[#262626] border border-[#333333] rounded p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
-          <div className="flex items-center space-x-2 text-xs font-semibold text-emerald-400 uppercase tracking-wider">
-            <Cpu className="w-4 h-4" />
+          <div className="flex items-center space-x-2 text-xs font-semibold text-[#ffa116] uppercase tracking-wider">
+            <Cpu className="w-3.5 h-3.5" />
             <span>Autonomous State Representation</span>
           </div>
-          <h1 className="text-xl font-extrabold text-white">Student Digital Twin Architecture</h1>
-          <p className="text-xs text-slate-400 max-w-2xl leading-relaxed">
+          <h1 className="text-lg font-bold text-[#eff1f6]">Student Digital Twin Architecture</h1>
+          <p className="text-xs text-[#9ca3af] max-w-2xl leading-relaxed">
             Continuously updated model of your career state. Every completed task, submitted repository evidence, assessment failure, and interview outcome modifies this structured twin.
           </p>
         </div>
 
-        <div className="flex items-center space-x-4 bg-slate-950/60 p-3.5 rounded-xl border border-slate-800">
-          <div className="text-center px-3 border-r border-slate-800">
-            <span className="text-[10px] text-slate-500 font-semibold uppercase">Version</span>
-            <div className="text-lg font-extrabold text-emerald-400">v{twin?.currentVersion || 1}</div>
+        <div className="flex items-center space-x-3 bg-[#1e1e1e] p-2.5 rounded border border-[#333333] text-xs">
+          <div className="text-center px-3 border-r border-[#333333]">
+            <span className="text-[10px] text-[#9ca3af] uppercase">Version</span>
+            <div className="text-base font-bold font-mono text-[#ffa116]">v{twin?.currentVersion || 1}</div>
           </div>
-          <div className="text-center px-3 border-r border-slate-800">
-            <span className="text-[10px] text-slate-500 font-semibold uppercase">Readiness</span>
-            <div className="text-lg font-extrabold text-white">{twin?.overallReadiness || 0}%</div>
+          <div className="text-center px-3 border-r border-[#333333]">
+            <span className="text-[10px] text-[#9ca3af] uppercase">Readiness</span>
+            <div className="text-base font-bold font-mono text-[#eff1f6]">{twin?.overallReadiness || 0}%</div>
           </div>
           <div className="text-center px-3">
-            <span className="text-[10px] text-slate-500 font-semibold uppercase">Snapshots</span>
-            <div className="text-lg font-extrabold text-indigo-400">{twin?.snapshotHistory?.length || 1}</div>
+            <span className="text-[10px] text-[#9ca3af] uppercase">Snapshots</span>
+            <div className="text-base font-bold font-mono text-[#2cbb5d]">{twin?.snapshotHistory?.length || 1}</div>
           </div>
         </div>
       </div>
 
-      {/* Feature Vector Model (Section 8: Digital Twin Feature Model) */}
-      <div className="space-y-3">
-        <div className="flex items-center justify-between">
-          <h2 className="text-sm font-bold text-white flex items-center gap-2">
-            <Layers className="w-4 h-4 text-emerald-400" />
+      {/* Feature Vector Model (Continuous Grid Panel) */}
+      <div className="bg-[#262626] border border-[#333333] rounded overflow-hidden">
+        <div className="px-4 py-3 border-b border-[#333333] flex items-center justify-between">
+          <h2 className="text-xs font-semibold text-[#eff1f6] uppercase tracking-wider flex items-center gap-2">
+            <Layers className="w-3.5 h-3.5 text-[#ffa116]" />
             <span>Digital Twin Feature Vector (18+ Normalized Parameters)</span>
           </h2>
-          <span className="text-xs text-slate-500">Transparent Mathematical Formulations</span>
+          <span className="text-[11px] text-[#9ca3af]">Mathematical Formulations</span>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3.5">
-          {featureCards.map((f, i) => (
-            <div key={i} className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-1 hover:border-slate-700 transition-colors">
-              <span className="text-[11px] font-medium text-slate-400">{f.label}</span>
-              <div className="text-lg font-extrabold text-white">{f.value}</div>
-              <p className="text-[10px] text-slate-500 line-clamp-1">{f.desc}</p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#333333] border-b border-[#333333]">
+          {featureCards.slice(0, 4).map((f, i) => (
+            <div key={i} className="p-3.5 space-y-0.5 hover:bg-[#2c2c2c] transition-colors">
+              <div className="text-[11px] text-[#9ca3af]">{f.label}</div>
+              <div className="text-base font-bold font-mono text-[#eff1f6]">{f.value}</div>
+              <p className="text-[10px] text-[#71717a] truncate">{f.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#333333] border-b border-[#333333]">
+          {featureCards.slice(4, 8).map((f, i) => (
+            <div key={i} className="p-3.5 space-y-0.5 hover:bg-[#2c2c2c] transition-colors">
+              <div className="text-[11px] text-[#9ca3af]">{f.label}</div>
+              <div className="text-base font-bold font-mono text-[#eff1f6]">{f.value}</div>
+              <p className="text-[10px] text-[#71717a] truncate">{f.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#333333]">
+          {featureCards.slice(8, 12).map((f, i) => (
+            <div key={i} className="p-3.5 space-y-0.5 hover:bg-[#2c2c2c] transition-colors">
+              <div className="text-[11px] text-[#9ca3af]">{f.label}</div>
+              <div className="text-base font-bold font-mono text-[#eff1f6]">{f.value}</div>
+              <p className="text-[10px] text-[#71717a] truncate">{f.desc}</p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Snapshot Version Lineage & History */}
-      <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-5">
-        <div className="flex items-center justify-between">
-          <div className="space-y-0.5">
-            <h3 className="text-sm font-bold text-white flex items-center gap-2">
-              <History className="w-4 h-4 text-emerald-400" />
+      {/* Snapshot Version Lineage & History (LeetCode Submissions Style Table) */}
+      <div className="bg-[#262626] border border-[#333333] rounded overflow-hidden">
+        <div className="px-4 py-3 border-b border-[#333333] flex items-center justify-between">
+          <div>
+            <h3 className="text-xs font-semibold text-[#eff1f6] uppercase tracking-wider flex items-center gap-2">
+              <History className="w-3.5 h-3.5 text-[#ffa116]" />
               <span>Version Lineage & State Change History</span>
             </h3>
-            <p className="text-xs text-slate-400">
-              Traceable record of how your digital twin evolved over time (v1 → v2 → v3 → v4).
+            <p className="text-[11px] text-[#9ca3af]">
+              Traceable chronological record of twin state progression (v1 → v2 → v3 → v4).
             </p>
           </div>
-          <span className="text-xs px-2.5 py-1 rounded bg-slate-800 text-slate-300 font-medium">
-            Audit Immutable
+          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#333333] text-[#9ca3af]">
+            IMMUTABLE
           </span>
         </div>
 
-        <div className="space-y-3">
+        <div className="divide-y divide-[#333333]">
           {twin?.snapshotHistory?.map((snap: any) => (
             <div
               key={snap.id}
-              className="p-4 rounded-xl bg-slate-950/60 border border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+              className="p-3.5 hover:bg-[#2c2c2c] transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs"
             >
               <div className="space-y-1">
                 <div className="flex items-center space-x-2">
-                  <span className="text-xs font-bold text-emerald-400 px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">
-                    Twin v{snap.version}
+                  <span className="text-[11px] font-mono font-semibold text-black px-1.5 py-0.2 rounded bg-[#ffa116]">
+                    v{snap.version}
                   </span>
-                  <span className="text-xs font-semibold text-slate-300 uppercase tracking-wide">
+                  <span className="font-semibold text-[#eff1f6] font-mono">
                     {snap.triggerEvent}
                   </span>
                 </div>
-                <p className="text-xs text-slate-400">{snap.changeSummary}</p>
+                <p className="text-[11px] text-[#9ca3af]">{snap.changeSummary}</p>
               </div>
 
-              <div className="flex items-center space-x-4 flex-shrink-0 text-xs text-slate-400">
+              <div className="flex items-center space-x-4 flex-shrink-0 text-[#9ca3af] text-[11px]">
                 <div>
-                  Readiness: <strong className="text-white">{snap.overallReadiness}%</strong>
+                  Readiness: <strong className="text-[#eff1f6] font-mono">{snap.overallReadiness}%</strong>
                 </div>
-                <div className="text-[11px] text-slate-500">
+                <div className="text-[10px] text-[#71717a] font-mono">
                   {new Date(snap.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </div>
               </div>

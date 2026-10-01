@@ -49,40 +49,40 @@ export const OpportunitiesPage: React.FC = () => {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-1 shadow-xl">
-        <div className="flex items-center space-x-2 text-xs font-semibold text-emerald-400 uppercase tracking-wider">
-          <Briefcase className="w-4 h-4" />
+    <div className="space-y-5 text-[#eff1f6]">
+      <div className="bg-[#262626] border border-[#333333] rounded p-4 space-y-1">
+        <div className="flex items-center space-x-2 text-xs font-semibold text-[#ffa116] uppercase tracking-wider">
+          <Briefcase className="w-3.5 h-3.5" />
           <span>Closed-Loop Opportunity Matching</span>
         </div>
-        <h1 className="text-xl font-extrabold text-white">Target Roles, Internships & Fellowships</h1>
-        <p className="text-xs text-slate-400 max-w-2xl leading-relaxed">
-          Opportunity Pathfinder distinguishes between <strong>Opportunity Match</strong> (how well your skills satisfy role criteria) and <strong>Candidate Readiness</strong> (your actual mock interview, portfolio, and consistency evidence).
+        <h1 className="text-lg font-bold text-[#eff1f6]">Target Roles, Internships & Fellowships</h1>
+        <p className="text-xs text-[#9ca3af] max-w-2xl leading-relaxed">
+          Opportunity Pathfinder distinguishes between <strong className="text-[#eff1f6]">Opportunity Match</strong> (skill requirements overlap) and <strong className="text-[#eff1f6]">Candidate Readiness</strong> (mock interviews, portfolio, and consistency evidence).
         </p>
       </div>
 
       {appliedMsg && (
-        <div className="p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-xs text-emerald-400 flex items-center justify-between">
+        <div className="p-3 bg-[#262626] border border-[#2cbb5d]/40 rounded text-xs text-[#eff1f6] flex items-center justify-between">
           <span className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4" />
+            <CheckCircle2 className="w-4 h-4 text-[#2cbb5d]" />
             {appliedMsg}
           </span>
-          <button onClick={() => setAppliedMsg(null)} className="text-slate-400 hover:text-white text-xs">
+          <button onClick={() => setAppliedMsg(null)} className="text-[#9ca3af] hover:text-white text-xs">
             Dismiss
           </button>
         </div>
       )}
 
       {/* Filter Tabs */}
-      <div className="flex space-x-2">
+      <div className="flex space-x-1.5">
         {['ALL', 'INTERNSHIP', 'FULL_TIME', 'RESEARCH'].map((t) => (
           <button
             key={t}
             onClick={() => setTypeFilter(t)}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+            className={`px-3 py-1 rounded text-xs font-medium transition-colors ${
               typeFilter === t
-                ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20'
-                : 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800'
+                ? 'bg-[#333333] text-[#eff1f6] border border-[#444444]'
+                : 'text-[#9ca3af] hover:text-[#eff1f6] hover:bg-[#262626]'
             }`}
           >
             {t.replace('_', ' ')}
@@ -90,60 +90,60 @@ export const OpportunitiesPage: React.FC = () => {
         ))}
       </div>
 
-      {/* Opportunity Cards */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* Opportunity Cards (LeetCode Style Clean Panels) */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {filtered.map((opp) => (
           <div
             key={opp.id}
-            className="p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-slate-700 transition-all flex flex-col justify-between space-y-4 shadow-xl"
+            className="bg-[#262626] border border-[#333333] hover:border-[#444444] rounded p-4 transition-colors flex flex-col justify-between space-y-3"
           >
-            <div className="space-y-3">
-              <div className="flex items-start justify-between">
+            <div className="space-y-2.5">
+              <div className="flex items-start justify-between pb-2 border-b border-[#333333]">
                 <div>
-                  <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">{opp.company}</span>
-                  <h3 className="text-base font-bold text-white">{opp.title}</h3>
+                  <span className="text-[10px] text-[#9ca3af] uppercase font-mono tracking-wider">{opp.company}</span>
+                  <h3 className="text-sm font-semibold text-[#eff1f6]">{opp.title}</h3>
                 </div>
 
                 <div className="flex items-center space-x-2">
                   <div className="text-right">
-                    <span className="text-base font-extrabold text-emerald-400">{opp.matchPercentage}%</span>
-                    <span className="text-[9px] text-slate-500 font-semibold block uppercase">Match</span>
+                    <span className="text-base font-bold font-mono text-[#2cbb5d]">{opp.matchPercentage}%</span>
+                    <span className="text-[9px] text-[#9ca3af] block uppercase">Match</span>
                   </div>
-                  <div className="text-right pl-2 border-l border-slate-800">
-                    <span className="text-base font-extrabold text-indigo-400">{opp.readinessPercentage}%</span>
-                    <span className="text-[9px] text-slate-500 font-semibold block uppercase">Readiness</span>
+                  <div className="text-right pl-2 border-l border-[#333333]">
+                    <span className="text-base font-bold font-mono text-[#ffa116]">{opp.readinessPercentage}%</span>
+                    <span className="text-[9px] text-[#9ca3af] block uppercase">Readiness</span>
                   </div>
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-center gap-3 text-xs text-slate-400">
+              <div className="flex flex-wrap items-center gap-2.5 text-[11px] text-[#9ca3af]">
                 <span className="flex items-center gap-1">
-                  <MapPin className="w-3.5 h-3.5 text-slate-500" />
+                  <MapPin className="w-3 h-3 text-[#71717a]" />
                   {opp.location}
                 </span>
-                <span className="flex items-center gap-1 text-emerald-400 font-medium">
-                  <DollarSign className="w-3.5 h-3.5" />
+                <span className="flex items-center gap-1 text-[#ffa116] font-mono font-medium">
+                  <DollarSign className="w-3 h-3" />
                   {opp.compensation}
                 </span>
-                <span className="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-semibold uppercase">
+                <span className="px-1.5 py-0.2 rounded bg-[#333333] text-[#eff1f6] text-[10px] font-mono uppercase">
                   {opp.type}
                 </span>
               </div>
 
-              <p className="text-xs text-slate-300 leading-relaxed">{opp.description}</p>
+              <p className="text-xs text-[#d1d5db] leading-relaxed line-clamp-2">{opp.description}</p>
 
-              {/* Match vs Readiness Breakdown & Explanation (Section 20) */}
-              <div className="p-3.5 bg-slate-950/60 rounded-xl border border-slate-800 space-y-2 text-xs">
-                <div className="flex justify-between items-center text-slate-400">
+              {/* Match vs Readiness Breakdown & Explanation */}
+              <div className="p-2.5 bg-[#202020] rounded border border-[#2d2d2d] space-y-1.5 text-xs">
+                <div className="flex justify-between items-center text-[11px] text-[#9ca3af]">
                   <span>Requirement Coverage:</span>
-                  <span className="font-semibold text-emerald-400">{opp.requirementsMetRatio}</span>
+                  <span className="font-mono text-[#2cbb5d] font-semibold">{opp.requirementsMetRatio}</span>
                 </div>
 
                 <div className="space-y-1">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase">Satisfied Competencies:</span>
-                  <div className="flex flex-wrap gap-1.5">
+                  <span className="text-[10px] text-[#9ca3af] uppercase font-semibold">Satisfied Competencies:</span>
+                  <div className="flex flex-wrap gap-1">
                     {opp.satisfiedSkills?.map((s: string, idx: number) => (
-                      <span key={idx} className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium">
+                      <span key={idx} className="text-[10px] px-1.5 py-0.2 rounded bg-[#2cbb5d]/10 text-[#2cbb5d] font-mono">
                         ✓ {s}
                       </span>
                     ))}
@@ -151,11 +151,11 @@ export const OpportunitiesPage: React.FC = () => {
                 </div>
 
                 {opp.missingSkills && opp.missingSkills.length > 0 && (
-                  <div className="space-y-1 pt-1">
-                    <span className="text-[10px] font-bold text-slate-400 uppercase">Pending / Missing:</span>
-                    <div className="flex flex-wrap gap-1.5">
+                  <div className="space-y-1 pt-0.5">
+                    <span className="text-[10px] text-[#9ca3af] uppercase font-semibold">Missing:</span>
+                    <div className="flex flex-wrap gap-1">
                       {opp.missingSkills.map((s: string, idx: number) => (
-                        <span key={idx} className="text-[10px] px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 border border-rose-500/20 font-medium">
+                        <span key={idx} className="text-[10px] px-1.5 py-0.2 rounded bg-[#ef4743]/10 text-[#ef4743] font-mono">
                           ✗ {s}
                         </span>
                       ))}
@@ -163,23 +163,20 @@ export const OpportunitiesPage: React.FC = () => {
                   </div>
                 )}
 
-                <div className="pt-2 border-t border-slate-800 text-[11px] text-slate-400 leading-relaxed">
-                  <strong>Match Rationale:</strong> {opp.whyMatchedExplanation}
-                </div>
-                <div className="text-[11px] text-slate-400 leading-relaxed">
-                  <strong>Readiness Insight:</strong> {opp.readinessExplanation}
+                <div className="pt-1.5 border-t border-[#2d2d2d] text-[11px] text-[#9ca3af] leading-relaxed">
+                  <strong className="text-[#eff1f6]">Rationale:</strong> {opp.whyMatchedExplanation}
                 </div>
               </div>
             </div>
 
-            <div className="flex items-center space-x-2 pt-2 border-t border-slate-800">
+            <div className="pt-2 border-t border-[#333333]">
               <button
                 onClick={() => handleApply(opp.id)}
                 disabled={applyingId === opp.id || opp.applicationStatus === 'APPLIED'}
-                className={`flex-1 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-center space-x-1.5 transition-all ${
+                className={`w-full py-2 rounded text-xs font-semibold flex items-center justify-center space-x-1.5 transition-colors ${
                   opp.applicationStatus === 'APPLIED'
-                    ? 'bg-slate-800 text-slate-400 cursor-default'
-                    : 'bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg shadow-emerald-500/20'
+                    ? 'bg-[#333333] text-[#71717a] cursor-default'
+                    : 'bg-[#ffa116] hover:bg-[#e08e14] text-black shadow-sm'
                 }`}
               >
                 <span>{opp.applicationStatus === 'APPLIED' ? 'Application Tracked (In Review)' : 'Apply with Digital Twin Proof'}</span>

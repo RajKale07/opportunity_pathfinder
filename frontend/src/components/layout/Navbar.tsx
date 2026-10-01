@@ -29,20 +29,19 @@ export const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <header className="h-16 border-b border-slate-800 bg-slate-900/80 backdrop-blur-md px-6 flex items-center justify-between sticky top-0 z-30">
-      <div className="flex items-center space-x-4">
+    <header className="h-14 border-b border-[#282828] bg-[#1a1a1a] px-5 flex items-center justify-between sticky top-0 z-30">
+      <div className="flex items-center space-x-6">
         <div className="flex items-center space-x-2.5">
-          <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center shadow-lg shadow-emerald-500/20">
-            <Sparkles className="w-5 h-5 text-white" />
+          <div className="h-7 w-7 rounded-md bg-[#ffa116] flex items-center justify-center text-black font-black text-sm shadow-sm">
+            <Sparkles className="w-4 h-4 text-black fill-black" />
           </div>
-          <div>
-            <span className="font-extrabold text-base tracking-tight text-white flex items-center gap-1.5">
+          <div className="flex items-baseline space-x-2">
+            <span className="font-semibold text-sm tracking-tight text-[#eff1f6]">
               Opportunity Pathfinder
-              <span className="text-[10px] font-semibold uppercase px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                OS v2.4
-              </span>
             </span>
-            <p className="text-[11px] text-slate-400 font-medium">AI Career Operating System & Digital Twin</p>
+            <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-[#282828] text-[#9ca3af] border border-[#383838]">
+              OS
+            </span>
           </div>
         </div>
       </div>
@@ -50,44 +49,40 @@ export const Navbar: React.FC = () => {
       <div className="flex items-center space-x-3">
         {/* Digital Twin State Pill */}
         {twinSummary && (
-          <div className="hidden md:flex items-center space-x-2.5 px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700/60 text-xs">
-            <span className="flex h-2 w-2 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          <div className="hidden md:flex items-center space-x-2 px-2.5 py-1 rounded bg-[#262626] border border-[#333333] text-xs">
+            <span className="h-2 w-2 rounded-full bg-[#ffa116]"></span>
+            <span className="text-[#9ca3af]">
+              Twin: <strong className="text-[#eff1f6] font-mono">v{twinSummary.version}</strong>
             </span>
-            <span className="text-slate-300 font-medium">
-              Twin State: <strong className="text-emerald-400">v{twinSummary.version}</strong>
-            </span>
-            <span className="text-slate-600">•</span>
-            <span className="text-slate-300">
-              Readiness: <strong className="text-white">{twinSummary.readiness}%</strong>
+            <span className="text-[#444444]">|</span>
+            <span className="text-[#9ca3af]">
+              Readiness: <strong className="text-[#eff1f6] font-mono">{twinSummary.readiness}%</strong>
             </span>
             <button 
               onClick={fetchTwinStatus} 
               title="Refresh Twin Telemetry"
-              className={`p-1 rounded text-slate-400 hover:text-white transition-colors ${refreshing ? 'animate-spin' : ''}`}
+              className={`p-0.5 rounded text-[#9ca3af] hover:text-[#eff1f6] transition-colors ${refreshing ? 'animate-spin' : ''}`}
             >
-              <RefreshCw className="w-3.5 h-3.5" />
+              <RefreshCw className="w-3 h-3" />
             </button>
           </div>
         )}
 
         {/* User Badge */}
-        <div className="flex items-center space-x-2 pl-2 border-l border-slate-800">
-          <div className="h-8 w-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 text-xs font-semibold">
+        <div className="flex items-center space-x-2.5 pl-3 border-l border-[#282828]">
+          <div className="h-7 w-7 rounded-full bg-[#262626] border border-[#3a3a3a] flex items-center justify-center text-[#eff1f6] text-xs font-medium">
             {user?.fullName?.charAt(0) || 'U'}
           </div>
           <div className="hidden sm:block text-left">
-            <div className="text-xs font-semibold text-slate-200">{user?.fullName || 'User'}</div>
-            <div className="text-[10px] text-slate-400 flex items-center gap-1">
-              <Shield className="w-2.5 h-2.5 text-emerald-400" />
+            <div className="text-xs font-medium text-[#eff1f6]">{user?.fullName || 'User'}</div>
+            <div className="text-[10px] text-[#71717a] font-mono">
               {user?.role?.replace('ROLE_', '') || 'STUDENT'}
             </div>
           </div>
           <button
             onClick={logout}
             title="Log Out"
-            className="p-1.5 ml-2 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors"
+            className="p-1.5 text-[#71717a] hover:text-[#eff1f6] hover:bg-[#262626] rounded transition-colors"
           >
             <LogOut className="w-4 h-4" />
           </button>

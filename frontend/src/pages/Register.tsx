@@ -27,67 +27,65 @@ export const Register: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col justify-center items-center p-4 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.06)_0,transparent_70%)] pointer-events-none" />
-
-      <div className="w-full max-w-md bg-slate-900/90 border border-slate-800 p-8 rounded-2xl shadow-2xl relative z-10 backdrop-blur-md">
-        <div className="text-center space-y-2 mb-8">
-          <div className="inline-flex h-12 w-12 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-400 items-center justify-center shadow-lg shadow-emerald-500/20 mb-2">
-            <Sparkles className="w-6 h-6 text-white" />
+    <div className="min-h-screen bg-[#1a1a1a] flex flex-col justify-center items-center p-4">
+      <div className="w-full max-w-sm bg-[#262626] border border-[#333333] p-7 rounded shadow-2xl">
+        <div className="text-center space-y-1 mb-6">
+          <div className="inline-flex h-10 w-10 rounded bg-[#ffa116] items-center justify-center mb-2">
+            <Sparkles className="w-5 h-5 text-black" />
           </div>
-          <h1 className="text-2xl font-extrabold text-white tracking-tight">Create Student Twin</h1>
-          <p className="text-xs text-slate-400 font-medium">Join Opportunity Pathfinder Career Operating System</p>
+          <h1 className="text-lg font-bold text-[#eff1f6] tracking-tight">Create Student Twin</h1>
+          <p className="text-xs text-[#9ca3af]">Initialize Career Digital Twin & Analytics</p>
         </div>
 
         {error && (
-          <div className="mb-6 p-3 bg-rose-500/10 border border-rose-500/20 rounded-xl text-rose-400 text-xs flex items-center gap-2">
+          <div className="mb-4 p-2.5 bg-[#ef4743]/10 border border-[#ef4743]/30 rounded text-[#ef4743] text-xs flex items-center gap-2 font-mono">
             <AlertCircle className="w-4 h-4 flex-shrink-0" />
             <span>{error}</span>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3.5">
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5">Full Name</label>
+            <label className="block text-[11px] font-mono text-[#9ca3af] mb-1">Full Name</label>
             <div className="relative">
-              <User className="w-4 h-4 absolute left-3 top-3 text-slate-500" />
+              <User className="w-3.5 h-3.5 absolute left-3 top-3 text-[#9ca3af]" />
               <input
                 type="text"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 required
-                className="w-full bg-slate-950/80 border border-slate-800 rounded-xl pl-9 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition-colors"
+                className="w-full bg-[#1a1a1a] border border-[#333333] rounded pl-9 pr-3 py-2 text-xs text-[#eff1f6] placeholder-[#6b7280] focus:outline-none focus:border-[#ffa116]"
                 placeholder="Alex Chen"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5">Email Address</label>
+            <label className="block text-[11px] font-mono text-[#9ca3af] mb-1">Email Address</label>
             <div className="relative">
-              <Mail className="w-4 h-4 absolute left-3 top-3 text-slate-500" />
+              <Mail className="w-3.5 h-3.5 absolute left-3 top-3 text-[#9ca3af]" />
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full bg-slate-950/80 border border-slate-800 rounded-xl pl-9 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition-colors"
+                className="w-full bg-[#1a1a1a] border border-[#333333] rounded pl-9 pr-3 py-2 text-xs text-[#eff1f6] placeholder-[#6b7280] focus:outline-none focus:border-[#ffa116]"
                 placeholder="alex.chen@university.edu"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5">Password</label>
+            <label className="block text-[11px] font-mono text-[#9ca3af] mb-1">Password</label>
             <div className="relative">
-              <Lock className="w-4 h-4 absolute left-3 top-3 text-slate-500" />
+              <Lock className="w-3.5 h-3.5 absolute left-3 top-3 text-[#9ca3af]" />
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 minLength={6}
-                className="w-full bg-slate-950/80 border border-slate-800 rounded-xl pl-9 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition-colors"
+                className="w-full bg-[#1a1a1a] border border-[#333333] rounded pl-9 pr-3 py-2 text-xs text-[#eff1f6] placeholder-[#6b7280] focus:outline-none focus:border-[#ffa116]"
                 placeholder="At least 6 characters"
               />
             </div>
@@ -96,17 +94,17 @@ export const Register: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full mt-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs py-3 rounded-xl flex items-center justify-center space-x-2 transition-all shadow-lg shadow-emerald-500/25 disabled:opacity-50"
+            className="w-full mt-2 bg-[#ffa116] hover:bg-[#ffb03a] text-black font-semibold text-xs py-2.5 rounded flex items-center justify-center space-x-1.5 transition-colors disabled:opacity-50"
           >
-            <span>{loading ? 'Initializing Twin...' : 'Initialize Career Digital Twin'}</span>
-            <ArrowRight className="w-4 h-4" />
+            <span>{loading ? 'Initializing Twin...' : 'Initialize Digital Twin'}</span>
+            <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </form>
 
-        <div className="mt-6 pt-6 border-t border-slate-800/80 text-center">
-          <p className="text-xs text-slate-400">
+        <div className="mt-5 pt-4 border-t border-[#333333] text-center">
+          <p className="text-xs text-[#9ca3af]">
             Already have an active twin?{' '}
-            <Link to="/login" className="text-emerald-400 hover:underline font-semibold">
+            <Link to="/login" className="text-[#ffa116] hover:underline font-semibold">
               Sign In
             </Link>
           </p>
