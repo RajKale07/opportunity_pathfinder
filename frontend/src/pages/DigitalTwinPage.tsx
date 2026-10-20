@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { digitalTwinApi } from '../api/client';
-import { Cpu, GitCommit, Layers, Sparkles, TrendingUp, History, Shield, CheckCircle } from 'lucide-react';
+import { Cpu, Layers, History } from 'lucide-react';
 
 export const DigitalTwinPage: React.FC = () => {
   const [twin, setTwin] = useState<any>(null);
@@ -21,9 +21,9 @@ export const DigitalTwinPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex h-96 items-center justify-center space-x-3 text-slate-400">
-        <div className="w-5 h-5 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
-        <span className="text-sm font-medium">Reconstructing Student Digital Twin...</span>
+      <div className="flex h-96 items-center justify-center space-x-2 text-[#4b5563]">
+        <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
+        <span className="text-xs font-mono">Reconstructing Student Digital Twin...</span>
       </div>
     );
   }
@@ -46,117 +46,117 @@ export const DigitalTwinPage: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-5 text-[#eff1f6]">
+    <div className="space-y-4 text-[#111827]">
       {/* Header Banner */}
-      <div className="bg-[#262626] border border-[#333333] rounded p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white border border-[#e5e7eb] rounded p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm">
         <div className="space-y-1">
-          <div className="flex items-center space-x-2 text-xs font-semibold text-[#ffa116] uppercase tracking-wider">
+          <div className="flex items-center space-x-2 text-xs font-bold text-black uppercase tracking-wider">
             <Cpu className="w-3.5 h-3.5" />
             <span>Autonomous State Representation</span>
           </div>
-          <h1 className="text-lg font-bold text-[#eff1f6]">Student Digital Twin Architecture</h1>
-          <p className="text-xs text-[#9ca3af] max-w-2xl leading-relaxed">
+          <h1 className="text-lg font-bold text-[#111827]">Student Digital Twin Architecture</h1>
+          <p className="text-xs text-[#6b7280] max-w-2xl leading-relaxed">
             Continuously updated model of your career state. Every completed task, submitted repository evidence, assessment failure, and interview outcome modifies this structured twin.
           </p>
         </div>
 
-        <div className="flex items-center space-x-3 bg-[#1e1e1e] p-2.5 rounded border border-[#333333] text-xs">
-          <div className="text-center px-3 border-r border-[#333333]">
-            <span className="text-[10px] text-[#9ca3af] uppercase">Version</span>
-            <div className="text-base font-bold font-mono text-[#ffa116]">v{twin?.currentVersion || 1}</div>
+        <div className="flex items-center space-x-3 bg-[#f9fafb] p-2.5 rounded border border-[#e5e7eb] text-xs">
+          <div className="text-center px-3 border-r border-[#e5e7eb]">
+            <span className="text-[10px] text-[#6b7280] uppercase font-mono">Version</span>
+            <div className="text-base font-bold font-mono text-black">v{twin?.currentVersion || 1}</div>
           </div>
-          <div className="text-center px-3 border-r border-[#333333]">
-            <span className="text-[10px] text-[#9ca3af] uppercase">Readiness</span>
-            <div className="text-base font-bold font-mono text-[#eff1f6]">{twin?.overallReadiness || 0}%</div>
+          <div className="text-center px-3 border-r border-[#e5e7eb]">
+            <span className="text-[10px] text-[#6b7280] uppercase font-mono">Readiness</span>
+            <div className="text-base font-bold font-mono text-black">{twin?.overallReadiness || 0}%</div>
           </div>
           <div className="text-center px-3">
-            <span className="text-[10px] text-[#9ca3af] uppercase">Snapshots</span>
-            <div className="text-base font-bold font-mono text-[#2cbb5d]">{twin?.snapshotHistory?.length || 1}</div>
+            <span className="text-[10px] text-[#6b7280] uppercase font-mono">Snapshots</span>
+            <div className="text-base font-bold font-mono text-[#059669]">{twin?.snapshotHistory?.length || 1}</div>
           </div>
         </div>
       </div>
 
       {/* Feature Vector Model (Continuous Grid Panel) */}
-      <div className="bg-[#262626] border border-[#333333] rounded overflow-hidden">
-        <div className="px-4 py-3 border-b border-[#333333] flex items-center justify-between">
-          <h2 className="text-xs font-semibold text-[#eff1f6] uppercase tracking-wider flex items-center gap-2">
-            <Layers className="w-3.5 h-3.5 text-[#ffa116]" />
+      <div className="bg-white border border-[#e5e7eb] rounded overflow-hidden shadow-sm">
+        <div className="px-4 py-3 border-b border-[#e5e7eb] flex items-center justify-between">
+          <h2 className="text-xs font-bold text-[#111827] uppercase tracking-wider flex items-center gap-2">
+            <Layers className="w-3.5 h-3.5 text-black" />
             <span>Digital Twin Feature Vector (18+ Normalized Parameters)</span>
           </h2>
-          <span className="text-[11px] text-[#9ca3af]">Mathematical Formulations</span>
+          <span className="text-[11px] font-mono text-[#6b7280]">Mathematical Formulations</span>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#333333] border-b border-[#333333]">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#e5e7eb] border-b border-[#e5e7eb]">
           {featureCards.slice(0, 4).map((f, i) => (
-            <div key={i} className="p-3.5 space-y-0.5 hover:bg-[#2c2c2c] transition-colors">
-              <div className="text-[11px] text-[#9ca3af]">{f.label}</div>
-              <div className="text-base font-bold font-mono text-[#eff1f6]">{f.value}</div>
-              <p className="text-[10px] text-[#71717a] truncate">{f.desc}</p>
+            <div key={i} className="p-3.5 space-y-0.5 hover:bg-[#f9fafb] transition-colors">
+              <div className="text-[11px] text-[#6b7280]">{f.label}</div>
+              <div className="text-base font-bold font-mono text-[#111827]">{f.value}</div>
+              <p className="text-[10px] text-[#9ca3af] truncate">{f.desc}</p>
             </div>
           ))}
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#333333] border-b border-[#333333]">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#e5e7eb] border-b border-[#e5e7eb]">
           {featureCards.slice(4, 8).map((f, i) => (
-            <div key={i} className="p-3.5 space-y-0.5 hover:bg-[#2c2c2c] transition-colors">
-              <div className="text-[11px] text-[#9ca3af]">{f.label}</div>
-              <div className="text-base font-bold font-mono text-[#eff1f6]">{f.value}</div>
-              <p className="text-[10px] text-[#71717a] truncate">{f.desc}</p>
+            <div key={i} className="p-3.5 space-y-0.5 hover:bg-[#f9fafb] transition-colors">
+              <div className="text-[11px] text-[#6b7280]">{f.label}</div>
+              <div className="text-base font-bold font-mono text-[#111827]">{f.value}</div>
+              <p className="text-[10px] text-[#9ca3af] truncate">{f.desc}</p>
             </div>
           ))}
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#333333]">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#e5e7eb]">
           {featureCards.slice(8, 12).map((f, i) => (
-            <div key={i} className="p-3.5 space-y-0.5 hover:bg-[#2c2c2c] transition-colors">
-              <div className="text-[11px] text-[#9ca3af]">{f.label}</div>
-              <div className="text-base font-bold font-mono text-[#eff1f6]">{f.value}</div>
-              <p className="text-[10px] text-[#71717a] truncate">{f.desc}</p>
+            <div key={i} className="p-3.5 space-y-0.5 hover:bg-[#f9fafb] transition-colors">
+              <div className="text-[11px] text-[#6b7280]">{f.label}</div>
+              <div className="text-base font-bold font-mono text-[#111827]">{f.value}</div>
+              <p className="text-[10px] text-[#9ca3af] truncate">{f.desc}</p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Snapshot Version Lineage & History (LeetCode Submissions Style Table) */}
-      <div className="bg-[#262626] border border-[#333333] rounded overflow-hidden">
-        <div className="px-4 py-3 border-b border-[#333333] flex items-center justify-between">
+      {/* Snapshot Version Lineage & History */}
+      <div className="bg-white border border-[#e5e7eb] rounded overflow-hidden shadow-sm">
+        <div className="px-4 py-3 border-b border-[#e5e7eb] flex items-center justify-between">
           <div>
-            <h3 className="text-xs font-semibold text-[#eff1f6] uppercase tracking-wider flex items-center gap-2">
-              <History className="w-3.5 h-3.5 text-[#ffa116]" />
+            <h3 className="text-xs font-bold text-[#111827] uppercase tracking-wider flex items-center gap-2">
+              <History className="w-3.5 h-3.5 text-black" />
               <span>Version Lineage & State Change History</span>
             </h3>
-            <p className="text-[11px] text-[#9ca3af]">
+            <p className="text-[11px] text-[#6b7280]">
               Traceable chronological record of twin state progression (v1 → v2 → v3 → v4).
             </p>
           </div>
-          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#333333] text-[#9ca3af]">
+          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#f3f4f6] text-[#111827] border border-[#e5e7eb] font-semibold">
             IMMUTABLE
           </span>
         </div>
 
-        <div className="divide-y divide-[#333333]">
+        <div className="divide-y divide-[#e5e7eb]">
           {twin?.snapshotHistory?.map((snap: any) => (
             <div
               key={snap.id}
-              className="p-3.5 hover:bg-[#2c2c2c] transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs"
+              className="p-3.5 hover:bg-[#f9fafb] transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs"
             >
               <div className="space-y-1">
                 <div className="flex items-center space-x-2">
-                  <span className="text-[11px] font-mono font-semibold text-black px-1.5 py-0.2 rounded bg-[#ffa116]">
+                  <span className="text-[11px] font-mono font-bold text-white px-1.5 py-0.5 rounded bg-black">
                     v{snap.version}
                   </span>
-                  <span className="font-semibold text-[#eff1f6] font-mono">
+                  <span className="font-semibold text-[#111827] font-mono">
                     {snap.triggerEvent}
                   </span>
                 </div>
-                <p className="text-[11px] text-[#9ca3af]">{snap.changeSummary}</p>
+                <p className="text-[11px] text-[#6b7280]">{snap.changeSummary}</p>
               </div>
 
-              <div className="flex items-center space-x-4 flex-shrink-0 text-[#9ca3af] text-[11px]">
+              <div className="flex items-center space-x-4 flex-shrink-0 text-[#6b7280] text-[11px]">
                 <div>
-                  Readiness: <strong className="text-[#eff1f6] font-mono">{snap.overallReadiness}%</strong>
+                  Readiness: <strong className="text-[#111827] font-mono">{snap.overallReadiness}%</strong>
                 </div>
-                <div className="text-[10px] text-[#71717a] font-mono">
+                <div className="text-[10px] text-[#9ca3af] font-mono">
                   {new Date(snap.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </div>
               </div>

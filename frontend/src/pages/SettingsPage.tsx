@@ -51,66 +51,66 @@ export const SettingsPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-4 max-w-4xl">
+    <div className="space-y-4 max-w-4xl text-[#111827]">
       {/* Header */}
-      <div className="bg-[#262626] border border-[#333333] rounded px-5 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="bg-white border border-[#e5e7eb] rounded px-5 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm">
         <div>
-          <div className="flex items-center space-x-2 text-[11px] font-mono text-[#ffa116]">
+          <div className="flex items-center space-x-2 text-[11px] font-mono font-bold text-black">
             <Settings className="w-3.5 h-3.5" />
             <span>PROFILE & SYSTEM PREFERENCES</span>
           </div>
-          <h1 className="text-base font-semibold text-[#eff1f6] mt-0.5">Student Career Profile & Preferences</h1>
-          <p className="text-xs text-[#9ca3af] mt-0.5">
+          <h1 className="text-base font-bold text-[#111827] mt-0.5">Student Career Profile & Preferences</h1>
+          <p className="text-xs text-[#6b7280] mt-0.5">
             Configure target domains, weekly study availability, portfolio repositories, and career constraints.
           </p>
         </div>
       </div>
 
       {msg && (
-        <div className="p-3 bg-[#262626] border border-[#2cbb5d]/40 rounded text-xs text-[#2cbb5d] font-mono flex items-center justify-between">
+        <div className="p-3 bg-white border border-black rounded text-xs text-[#111827] font-mono flex items-center justify-between shadow-sm">
           <span className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4" />
+            <CheckCircle2 className="w-4 h-4 text-[#059669]" />
             {msg}
           </span>
-          <button onClick={() => setMsg(null)} className="text-[#9ca3af] hover:text-[#eff1f6] text-xs">Dismiss</button>
+          <button onClick={() => setMsg(null)} className="text-[#6b7280] hover:text-black text-xs font-semibold">Dismiss</button>
         </div>
       )}
 
-      <form onSubmit={handleSave} className="bg-[#262626] border border-[#333333] rounded p-5 space-y-4">
+      <form onSubmit={handleSave} className="bg-white border border-[#e5e7eb] rounded p-5 space-y-4 shadow-sm">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="text-[11px] font-mono text-[#9ca3af] block mb-1">Professional Headline</label>
+            <label className="text-[11px] font-mono font-semibold text-[#6b7280] block mb-1">Professional Headline</label>
             <input
               type="text"
               value={headline}
               onChange={(e) => setHeadline(e.target.value)}
-              className="w-full bg-[#1a1a1a] border border-[#333333] rounded px-3 py-1.5 text-xs text-[#eff1f6] focus:outline-none focus:border-[#ffa116]"
+              className="w-full bg-[#f9fafb] border border-[#d1d5db] rounded px-3 py-1.5 text-xs text-[#111827] focus:outline-none focus:border-black"
             />
           </div>
 
           <div>
-            <label className="text-[11px] font-mono text-[#9ca3af] block mb-1">Target Primary Role</label>
+            <label className="text-[11px] font-mono font-semibold text-[#6b7280] block mb-1">Target Primary Role</label>
             <input
               type="text"
               value={targetRole}
               onChange={(e) => setTargetRole(e.target.value)}
-              className="w-full bg-[#1a1a1a] border border-[#333333] rounded px-3 py-1.5 text-xs text-[#eff1f6] focus:outline-none focus:border-[#ffa116]"
+              className="w-full bg-[#f9fafb] border border-[#d1d5db] rounded px-3 py-1.5 text-xs text-[#111827] focus:outline-none focus:border-black"
             />
           </div>
 
           <div>
-            <label className="text-[11px] font-mono text-[#9ca3af] block mb-1">Preferred Career Domain</label>
+            <label className="text-[11px] font-mono font-semibold text-[#6b7280] block mb-1">Preferred Career Domain</label>
             <input
               type="text"
               value={preferredDomain}
               onChange={(e) => setPreferredDomain(e.target.value)}
-              className="w-full bg-[#1a1a1a] border border-[#333333] rounded px-3 py-1.5 text-xs text-[#eff1f6] focus:outline-none focus:border-[#ffa116]"
+              className="w-full bg-[#f9fafb] border border-[#d1d5db] rounded px-3 py-1.5 text-xs text-[#111827] focus:outline-none focus:border-black"
             />
           </div>
 
           <div>
-            <label className="text-[11px] font-mono text-[#9ca3af] block mb-1">
-              Weekly Available Study Hours: <span className="text-[#ffa116] font-bold">{weeklyHours}h/wk</span>
+            <label className="text-[11px] font-mono font-semibold text-[#6b7280] block mb-1">
+              Weekly Available Study Hours: <span className="text-black font-bold">{weeklyHours}h/wk</span>
             </label>
             <input
               type="range"
@@ -118,16 +118,16 @@ export const SettingsPage: React.FC = () => {
               max="40"
               value={weeklyHours}
               onChange={(e) => setWeeklyHours(Number(e.target.value))}
-              className="w-full accent-[#ffa116] mt-2"
+              className="w-full accent-black mt-2"
             />
           </div>
 
           <div>
-            <label className="text-[11px] font-mono text-[#9ca3af] block mb-1">Work Preference</label>
+            <label className="text-[11px] font-mono font-semibold text-[#6b7280] block mb-1">Work Preference</label>
             <select
               value={remotePreference}
               onChange={(e) => setRemotePreference(e.target.value)}
-              className="w-full bg-[#1a1a1a] border border-[#333333] rounded px-3 py-1.5 text-xs text-[#eff1f6] focus:outline-none focus:border-[#ffa116]"
+              className="w-full bg-[#f9fafb] border border-[#d1d5db] rounded px-3 py-1.5 text-xs text-[#111827] focus:outline-none focus:border-black"
             >
               <option value="REMOTE">Remote</option>
               <option value="HYBRID">Hybrid</option>
@@ -136,30 +136,30 @@ export const SettingsPage: React.FC = () => {
           </div>
 
           <div>
-            <label className="text-[11px] font-mono text-[#9ca3af] block mb-1">GitHub Profile / Org URL</label>
+            <label className="text-[11px] font-mono font-semibold text-[#6b7280] block mb-1">GitHub Profile / Org URL</label>
             <input
               type="url"
               value={githubUrl}
               onChange={(e) => setGithubUrl(e.target.value)}
-              className="w-full bg-[#1a1a1a] border border-[#333333] rounded px-3 py-1.5 text-xs text-[#eff1f6] focus:outline-none focus:border-[#ffa116]"
+              className="w-full bg-[#f9fafb] border border-[#d1d5db] rounded px-3 py-1.5 text-xs text-[#111827] focus:outline-none focus:border-black"
             />
           </div>
         </div>
 
         <div>
-          <label className="text-[11px] font-mono text-[#9ca3af] block mb-1">Biography / Career Statement</label>
+          <label className="text-[11px] font-mono font-semibold text-[#6b7280] block mb-1">Biography / Career Statement</label>
           <textarea
             rows={3}
             value={biography}
             onChange={(e) => setBiography(e.target.value)}
-            className="w-full bg-[#1a1a1a] border border-[#333333] rounded p-3 text-xs text-[#eff1f6] focus:outline-none focus:border-[#ffa116]"
+            className="w-full bg-[#f9fafb] border border-[#d1d5db] rounded p-3 text-xs text-[#111827] focus:outline-none focus:border-black"
           />
         </div>
 
         <button
           type="submit"
           disabled={saving}
-          className="px-5 py-2 bg-[#ffa116] hover:bg-[#ffb03a] disabled:opacity-50 text-black rounded text-xs font-semibold flex items-center space-x-1.5 transition-colors"
+          className="px-5 py-2 bg-black hover:bg-neutral-800 disabled:opacity-50 text-white rounded text-xs font-semibold flex items-center space-x-1.5 transition-colors shadow-sm"
         >
           <Save className="w-3.5 h-3.5" />
           <span>{saving ? 'Synchronizing...' : 'Save & Update Twin'}</span>

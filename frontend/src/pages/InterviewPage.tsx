@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { interviewApi } from '../api/client';
-import { MessageSquareCode, CheckCircle2, AlertTriangle, Send, BookOpen, Clock } from 'lucide-react';
+import { MessageSquareCode, CheckCircle2, AlertTriangle, Send, BookOpen } from 'lucide-react';
 
 export const InterviewPage: React.FC = () => {
   const [questions, setQuestions] = useState<any[]>([]);
@@ -52,24 +52,24 @@ export const InterviewPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex h-96 items-center justify-center space-x-2 text-[#9ca3af]">
-        <div className="w-4 h-4 border-2 border-[#ffa116] border-t-transparent rounded-full animate-spin"></div>
+      <div className="flex h-96 items-center justify-center space-x-2 text-[#4b5563]">
+        <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
         <span className="text-xs font-mono">Loading interview simulator & question banks...</span>
       </div>
     );
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 text-[#111827]">
       {/* Header */}
-      <div className="bg-[#262626] border border-[#333333] rounded px-5 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="bg-white border border-[#e5e7eb] rounded px-5 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm">
         <div>
-          <div className="flex items-center space-x-2 text-[11px] font-mono text-[#ffa116]">
+          <div className="flex items-center space-x-2 text-[11px] font-mono font-bold text-black">
             <MessageSquareCode className="w-3.5 h-3.5" />
             <span>INTERVIEW ASSESSMENT ENGINE</span>
           </div>
-          <h1 className="text-base font-semibold text-[#eff1f6] mt-0.5">Mock Technical Assessments & Diagnostics</h1>
-          <p className="text-xs text-[#9ca3af] mt-0.5">
+          <h1 className="text-base font-bold text-[#111827] mt-0.5">Mock Technical Assessments & Diagnostics</h1>
+          <p className="text-xs text-[#6b7280] mt-0.5">
             Role-specific technical, algorithmic, and architectural challenges. Weaknesses automatically route into adaptive roadmap replanning.
           </p>
         </div>
@@ -77,21 +77,21 @@ export const InterviewPage: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Left: Questions List (LeetCode Problem List Style) */}
-        <div className="bg-[#262626] border border-[#333333] rounded overflow-hidden flex flex-col h-[680px]">
-          <div className="px-4 py-2.5 border-b border-[#333333] flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#eff1f6] flex items-center gap-1.5">
-              <BookOpen className="w-3.5 h-3.5 text-[#ffa116]" />
+        <div className="bg-white border border-[#e5e7eb] rounded overflow-hidden flex flex-col h-[680px] shadow-sm">
+          <div className="px-4 py-2.5 border-b border-[#e5e7eb] flex items-center justify-between bg-[#f9fafb]">
+            <span className="text-xs font-bold text-[#111827] flex items-center gap-1.5">
+              <BookOpen className="w-3.5 h-3.5 text-black" />
               Assessment Bank
             </span>
-            <span className="text-[11px] font-mono text-[#9ca3af]">{questions.length} problems</span>
+            <span className="text-[11px] font-mono text-[#6b7280]">{questions.length} problems</span>
           </div>
 
-          <div className="divide-y divide-[#333333] overflow-y-auto flex-1">
+          <div className="divide-y divide-[#e5e7eb] overflow-y-auto flex-1">
             {questions.map((q, idx) => {
               const isSelected = selectedQuestion?.id === q.id;
               const diffText = q.difficulty <= 2 ? 'Easy' : q.difficulty === 3 ? 'Medium' : 'Hard';
               const diffColor =
-                q.difficulty <= 2 ? 'text-[#2cbb5d]' : q.difficulty === 3 ? 'text-[#ffc01e]' : 'text-[#ef4743]';
+                q.difficulty <= 2 ? 'text-[#059669]' : q.difficulty === 3 ? 'text-[#d97706]' : 'text-[#dc2626]';
 
               return (
                 <div
@@ -102,14 +102,14 @@ export const InterviewPage: React.FC = () => {
                     setAnswer('');
                   }}
                   className={`p-3.5 cursor-pointer transition-colors ${
-                    isSelected ? 'bg-[#2e2e2e] border-l-2 border-[#ffa116]' : 'hover:bg-[#2a2a2a]'
+                    isSelected ? 'bg-[#f3f4f6] border-l-2 border-black' : 'hover:bg-[#f9fafb]'
                   }`}
                 >
                   <div className="flex items-center justify-between text-[11px] font-mono mb-1">
-                    <span className="text-[#9ca3af] font-semibold">{q.targetSkillName}</span>
-                    <span className={diffColor}>{diffText}</span>
+                    <span className="text-[#6b7280] font-semibold">{q.targetSkillName}</span>
+                    <span className={`${diffColor} font-bold`}>{diffText}</span>
                   </div>
-                  <div className="text-xs font-medium text-[#eff1f6] line-clamp-2">{q.questionText}</div>
+                  <div className="text-xs font-semibold text-[#111827] line-clamp-2">{q.questionText}</div>
                 </div>
               );
             })}
@@ -119,45 +119,45 @@ export const InterviewPage: React.FC = () => {
         {/* Right: Active Problem & Submission Area (LeetCode Style) */}
         <div className="lg:col-span-2 space-y-4">
           {selectedQuestion && (
-            <div className="bg-[#262626] border border-[#333333] rounded overflow-hidden">
+            <div className="bg-white border border-[#e5e7eb] rounded overflow-hidden shadow-sm">
               {/* Problem Title & Meta Header */}
-              <div className="p-4 border-b border-[#333333] space-y-2">
+              <div className="p-4 border-b border-[#e5e7eb] space-y-2">
                 <div className="flex items-center space-x-2">
                   <span
-                    className={`text-[10px] font-mono font-semibold px-2 py-0.5 rounded ${
+                    className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded ${
                       selectedQuestion.difficulty <= 2
-                        ? 'text-[#2cbb5d] bg-[#2cbb5d]/10'
+                        ? 'text-[#059669] bg-[#ecfdf5] border border-[#a7f3d0]'
                         : selectedQuestion.difficulty === 3
-                        ? 'text-[#ffc01e] bg-[#ffc01e]/10'
-                        : 'text-[#ef4743] bg-[#ef4743]/10'
+                        ? 'text-[#d97706] bg-[#fffbeb] border border-[#fde68a]'
+                        : 'text-[#dc2626] bg-[#fef2f2] border border-[#fecaca]'
                     }`}
                   >
                     {selectedQuestion.difficulty <= 2 ? 'Easy' : selectedQuestion.difficulty === 3 ? 'Medium' : 'Hard'}
                   </span>
-                  <span className="text-[11px] font-mono text-[#9ca3af] bg-[#333333] px-2 py-0.5 rounded">
+                  <span className="text-[11px] font-mono text-[#374151] bg-[#f3f4f6] px-2 py-0.5 rounded border border-[#e5e7eb] font-semibold">
                     {selectedQuestion.type}
                   </span>
-                  <span className="text-[11px] font-mono text-[#9ca3af]">
-                    Skill: <span className="text-[#eff1f6]">{selectedQuestion.targetSkillName}</span>
+                  <span className="text-[11px] font-mono text-[#6b7280]">
+                    Skill: <span className="text-[#111827] font-semibold">{selectedQuestion.targetSkillName}</span>
                   </span>
                 </div>
-                <h3 className="text-sm font-semibold text-[#eff1f6] leading-relaxed">
+                <h3 className="text-sm font-bold text-[#111827] leading-relaxed">
                   {selectedQuestion.questionText}
                 </h3>
               </div>
 
               {/* Evaluation criteria guideline */}
               {selectedQuestion.sampleAnswerGuideline && (
-                <div className="px-4 py-2.5 bg-[#202020] border-b border-[#333333] text-xs space-y-1">
-                  <span className="text-[10px] font-mono uppercase text-[#ffa116]">Evaluation Criteria:</span>
-                  <p className="text-[11px] text-[#9ca3af] leading-relaxed">{selectedQuestion.sampleAnswerGuideline}</p>
+                <div className="px-4 py-2.5 bg-[#f9fafb] border-b border-[#e5e7eb] text-xs space-y-1">
+                  <span className="text-[10px] font-mono uppercase font-bold text-black">Evaluation Criteria:</span>
+                  <p className="text-[11px] text-[#6b7280] leading-relaxed">{selectedQuestion.sampleAnswerGuideline}</p>
                 </div>
               )}
 
               {/* Solution Editor Form */}
               <form onSubmit={handleSubmitAnswer} className="p-4 space-y-3">
-                <div className="flex items-center justify-between text-xs text-[#9ca3af]">
-                  <label className="font-mono text-[11px]">Technical Solution / Architecture</label>
+                <div className="flex items-center justify-between text-xs text-[#6b7280]">
+                  <label className="font-mono text-[11px] font-bold">Technical Solution / Architecture</label>
                   <span className="font-mono text-[10px] text-[#9ca3af]">Markdown / Code Supported</span>
                 </div>
                 <textarea
@@ -166,17 +166,17 @@ export const InterviewPage: React.FC = () => {
                   value={answer}
                   onChange={(e) => setAnswer(e.target.value)}
                   placeholder="// Provide reasoning, design tradeoffs, edge cases, and code snippet..."
-                  className="w-full bg-[#1a1a1a] border border-[#333333] rounded p-3 text-xs text-[#eff1f6] font-mono placeholder-[#6b7280] focus:outline-none focus:border-[#ffa116] leading-relaxed"
+                  className="w-full bg-[#f9fafb] border border-[#d1d5db] rounded p-3 text-xs text-[#111827] font-mono placeholder-[#9ca3af] focus:outline-none focus:border-black leading-relaxed"
                 />
 
                 <div className="flex items-center justify-between pt-1">
-                  <span className="text-[11px] font-mono text-[#9ca3af]">
+                  <span className="text-[11px] font-mono text-[#6b7280]">
                     Evaluated by LLM Diagnostic Pipeline
                   </span>
                   <button
                     type="submit"
                     disabled={submitting || !answer.trim()}
-                    className="px-4 py-1.5 bg-[#ffa116] hover:bg-[#ffb03a] disabled:opacity-50 text-black text-xs font-semibold rounded flex items-center space-x-1.5 transition-colors"
+                    className="px-4 py-1.5 bg-black hover:bg-neutral-800 disabled:opacity-50 text-white text-xs font-semibold rounded flex items-center space-x-1.5 transition-colors shadow-sm"
                   >
                     <Send className="w-3.5 h-3.5" />
                     <span>{submitting ? 'Running Assessment...' : 'Submit Solution'}</span>
@@ -186,27 +186,27 @@ export const InterviewPage: React.FC = () => {
 
               {/* Evaluation Feedback Panel */}
               {evaluationResult && (
-                <div className="p-4 border-t border-[#333333] bg-[#202020] space-y-3">
+                <div className="p-4 border-t border-[#e5e7eb] bg-[#f9fafb] space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-[#eff1f6] flex items-center gap-1.5">
-                      <CheckCircle2 className="w-4 h-4 text-[#2cbb5d]" />
+                    <span className="text-xs font-bold text-[#111827] flex items-center gap-1.5">
+                      <CheckCircle2 className="w-4 h-4 text-[#059669]" />
                       Submission Result
                     </span>
                     <span
                       className={`text-sm font-mono font-bold ${
-                        evaluationResult.score >= 70 ? 'text-[#2cbb5d]' : 'text-[#ef4743]'
+                        evaluationResult.score >= 70 ? 'text-[#059669]' : 'text-[#dc2626]'
                       }`}
                     >
                       {evaluationResult.score >= 70 ? 'Accepted' : 'Remediation Needed'} • {evaluationResult.score}%
                     </span>
                   </div>
 
-                  <p className="text-xs text-[#eff1f6] leading-relaxed font-mono bg-[#1a1a1a] p-3 rounded border border-[#333333]">
+                  <p className="text-xs text-[#111827] leading-relaxed font-mono bg-white p-3 rounded border border-[#e5e7eb]">
                     {evaluationResult.feedback}
                   </p>
 
                   {evaluationResult.detectedWeakness && (
-                    <div className="p-2.5 rounded bg-[#ef4743]/10 border border-[#ef4743]/30 text-xs text-[#ef4743] flex items-center gap-2 font-mono">
+                    <div className="p-2.5 rounded bg-[#fef2f2] border border-[#fecaca] text-xs text-[#dc2626] flex items-center gap-2 font-mono">
                       <AlertTriangle className="w-4 h-4 flex-shrink-0" />
                       <span>
                         Weakness Detected: <strong>{evaluationResult.detectedWeakness}</strong> (Telemetry relayed to Adaptive Replanner)
@@ -220,23 +220,23 @@ export const InterviewPage: React.FC = () => {
 
           {/* Submissions History Table */}
           {history.length > 0 && (
-            <div className="bg-[#262626] border border-[#333333] rounded overflow-hidden">
-              <div className="px-4 py-2.5 border-b border-[#333333] flex items-center justify-between">
-                <span className="text-xs font-semibold text-[#eff1f6]">Recent Practice Submissions</span>
-                <span className="text-[11px] font-mono text-[#9ca3af]">{history.length} attempts</span>
+            <div className="bg-white border border-[#e5e7eb] rounded overflow-hidden shadow-sm">
+              <div className="px-4 py-2.5 border-b border-[#e5e7eb] flex items-center justify-between bg-[#f9fafb]">
+                <span className="text-xs font-bold text-[#111827]">Recent Practice Submissions</span>
+                <span className="text-[11px] font-mono text-[#6b7280]">{history.length} attempts</span>
               </div>
-              <div className="divide-y divide-[#333333]">
+              <div className="divide-y divide-[#e5e7eb]">
                 {history.slice(0, 4).map((h) => (
-                  <div key={h.id} className="px-4 py-2.5 flex items-center justify-between text-xs hover:bg-[#2e2e2e] transition-colors">
+                  <div key={h.id} className="px-4 py-2.5 flex items-center justify-between text-xs hover:bg-[#f9fafb] transition-colors">
                     <div className="space-y-0.5">
-                      <div className="font-medium text-[#eff1f6] line-clamp-1">{h.questionText}</div>
-                      <div className="text-[11px] font-mono text-[#9ca3af]">
+                      <div className="font-semibold text-[#111827] line-clamp-1">{h.questionText}</div>
+                      <div className="text-[11px] font-mono text-[#6b7280]">
                         {new Date(h.timestamp).toLocaleDateString()}
                       </div>
                     </div>
                     <span
                       className={`font-mono text-xs font-bold ${
-                        h.score >= 70 ? 'text-[#2cbb5d]' : 'text-[#ffc01e]'
+                        h.score >= 70 ? 'text-[#059669]' : 'text-[#d97706]'
                       }`}
                     >
                       {h.score}%

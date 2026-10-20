@@ -48,11 +48,11 @@ const navItems = [
 
 export const Sidebar: React.FC = () => {
   return (
-    <aside className="w-60 bg-[#1a1a1a] border-r border-[#282828] flex flex-col justify-between flex-shrink-0 min-h-[calc(100vh-3.5rem)]">
-      <div className="p-3 space-y-5">
+    <aside className="w-60 bg-white border-r border-[#e5e7eb] flex flex-col justify-between flex-shrink-0 min-h-[calc(100vh-3.5rem)]">
+      <div className="p-3 space-y-4">
         {navItems.map((section, idx) => (
           <div key={idx} className="space-y-1">
-            <div className="px-3 text-[10px] font-semibold text-[#666666] uppercase tracking-wider">
+            <div className="px-3 text-[10px] font-bold text-[#9ca3af] uppercase tracking-wider">
               {section.group}
             </div>
             <div className="space-y-0.5">
@@ -65,8 +65,8 @@ export const Sidebar: React.FC = () => {
                     className={({ isActive }) => `
                       flex items-center space-x-2.5 px-3 py-1.5 rounded text-xs transition-colors
                       ${isActive 
-                        ? 'bg-[#262626] text-[#eff1f6] font-medium border-l-2 border-[#ffa116]' 
-                        : 'text-[#9ca3af] hover:text-[#eff1f6] hover:bg-[#222222]'}
+                        ? 'bg-black text-white font-medium shadow-sm' 
+                        : 'text-[#4b5563] hover:text-black hover:bg-[#f3f4f6]'}
                     `}
                   >
                     <Icon className="w-3.5 h-3.5 flex-shrink-0" />
@@ -79,12 +79,12 @@ export const Sidebar: React.FC = () => {
         ))}
       </div>
 
-      <div className="p-3 m-2 rounded bg-[#202020] border border-[#2a2a2a] text-[11px] text-[#888888] space-y-1">
-        <div className="font-medium text-[#cccccc] flex items-center justify-between">
+      <div className="p-3 m-2 rounded bg-[#f9fafb] border border-[#e5e7eb] text-[11px] text-[#6b7280] space-y-1">
+        <div className="font-semibold text-[#111827] flex items-center justify-between">
           <span>Closed-Loop OS</span>
-          <span className="h-1.5 w-1.5 rounded-full bg-[#ffa116]"></span>
+          <span className="h-1.5 w-1.5 rounded-full bg-black"></span>
         </div>
-        <p className="text-[10px] text-[#666666] leading-tight">
+        <p className="text-[10px] text-[#6b7280] leading-tight">
           Adaptive feedback loop active
         </p>
       </div>

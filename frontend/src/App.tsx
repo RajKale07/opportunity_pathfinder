@@ -26,7 +26,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#1a1a1a] flex items-center justify-center text-[#9ca3af] text-xs font-mono">
+      <div className="min-h-screen bg-[#f7f8fa] flex items-center justify-center text-[#4b5563] text-xs font-mono">
         Initializing Career OS...
       </div>
     );

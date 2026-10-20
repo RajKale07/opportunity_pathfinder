@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { intelligenceApi, skillsApi } from '../api/client';
-import { AlertTriangle, CheckCircle2, Plus, Sparkles, ShieldAlert, ArrowRight } from 'lucide-react';
+import { AlertTriangle, CheckCircle2, Plus } from 'lucide-react';
 
 export const FailuresSuccessesPage: React.FC = () => {
   const [failures, setFailures] = useState<any[]>([]);
@@ -62,31 +62,31 @@ export const FailuresSuccessesPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex h-96 items-center justify-center space-x-2 text-[#9ca3af]">
-        <div className="w-4 h-4 border-2 border-[#ffa116] border-t-transparent rounded-full animate-spin"></div>
+      <div className="flex h-96 items-center justify-center space-x-2 text-[#4b5563]">
+        <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
         <span className="text-xs font-mono">Loading Failure & Success Intelligence...</span>
       </div>
     );
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 text-[#111827]">
       {/* Header */}
-      <div className="bg-[#262626] border border-[#333333] rounded px-5 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="bg-white border border-[#e5e7eb] rounded px-5 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm">
         <div>
-          <div className="flex items-center space-x-2 text-[11px] font-mono text-[#ffa116]">
+          <div className="flex items-center space-x-2 text-[11px] font-mono font-bold text-black">
             <AlertTriangle className="w-3.5 h-3.5" />
             <span>FAILURE & SUCCESS INTELLIGENCE</span>
           </div>
-          <h1 className="text-base font-semibold text-[#eff1f6] mt-0.5">Closed-Loop Learning from Setbacks</h1>
-          <p className="text-xs text-[#9ca3af] mt-0.5">
+          <h1 className="text-base font-bold text-[#111827] mt-0.5">Closed-Loop Learning from Setbacks</h1>
+          <p className="text-xs text-[#6b7280] mt-0.5">
             Failures are treated as telemetry. Root causes trigger automated roadmap adaptations.
           </p>
         </div>
 
         <button
           onClick={() => setShowLogModal(true)}
-          className="px-3.5 py-1.5 bg-[#ffa116] hover:bg-[#ffb03a] text-black rounded text-xs font-semibold flex items-center space-x-1.5 transition-colors self-start sm:self-auto"
+          className="px-3.5 py-1.5 bg-black hover:bg-neutral-800 text-white rounded text-xs font-semibold flex items-center space-x-1.5 transition-colors shadow-sm self-start sm:self-auto"
         >
           <Plus className="w-3.5 h-3.5" />
           <span>Simulate / Log Assessment Failure</span>
@@ -94,12 +94,12 @@ export const FailuresSuccessesPage: React.FC = () => {
       </div>
 
       {alertMsg && (
-        <div className="p-3 bg-[#262626] border border-[#2cbb5d]/40 rounded text-xs text-[#2cbb5d] flex items-center justify-between font-mono">
+        <div className="p-3 bg-white border border-black rounded text-xs text-[#111827] flex items-center justify-between font-mono shadow-sm">
           <span className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4" />
+            <CheckCircle2 className="w-4 h-4 text-[#059669]" />
             {alertMsg}
           </span>
-          <button onClick={() => setAlertMsg(null)} className="text-[#9ca3af] hover:text-[#eff1f6] text-xs">
+          <button onClick={() => setAlertMsg(null)} className="text-[#6b7280] hover:text-black text-xs font-medium">
             Dismiss
           </button>
         </div>
@@ -108,47 +108,47 @@ export const FailuresSuccessesPage: React.FC = () => {
       {/* Two Column Layout: Failures vs Successes */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Failures Column */}
-        <div className="bg-[#262626] border border-[#333333] rounded overflow-hidden">
-          <div className="px-4 py-2.5 border-b border-[#333333] flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#eff1f6] flex items-center gap-1.5">
-              <AlertTriangle className="w-3.5 h-3.5 text-[#ef4743]" />
+        <div className="bg-white border border-[#e5e7eb] rounded overflow-hidden shadow-sm">
+          <div className="px-4 py-2.5 border-b border-[#e5e7eb] flex items-center justify-between bg-[#f9fafb]">
+            <span className="text-xs font-bold text-[#111827] flex items-center gap-1.5">
+              <AlertTriangle className="w-3.5 h-3.5 text-[#dc2626]" />
               Failure Events & Root Cause Analysis
             </span>
-            <span className="text-[11px] font-mono text-[#9ca3af]">{failures.length} recorded</span>
+            <span className="text-[11px] font-mono text-[#6b7280]">{failures.length} recorded</span>
           </div>
 
           {failures.length === 0 ? (
-            <p className="text-xs text-[#9ca3af] p-8 text-center font-mono">
+            <p className="text-xs text-[#6b7280] p-8 text-center font-mono">
               No failure events recorded. Click "Simulate / Log Assessment Failure" to test adaptive replanning.
             </p>
           ) : (
-            <div className="divide-y divide-[#333333]">
+            <div className="divide-y divide-[#e5e7eb]">
               {failures.map((f) => (
-                <div key={f.id} className="p-4 hover:bg-[#2e2e2e] transition-colors space-y-2.5">
+                <div key={f.id} className="p-4 hover:bg-[#f9fafb] transition-colors space-y-2.5">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-[#eff1f6]">{f.context}</span>
-                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded text-[#ef4743] bg-[#ef4743]/10 border border-[#ef4743]/30">
+                    <span className="text-xs font-bold text-[#111827]">{f.context}</span>
+                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded text-[#dc2626] bg-[#fef2f2] border border-[#fecaca]">
                       Score: {f.score}%
                     </span>
                   </div>
 
-                  <div className="flex items-center space-x-4 text-xs font-mono text-[#9ca3af]">
+                  <div className="flex items-center space-x-4 text-xs font-mono text-[#6b7280]">
                     <div>
-                      Skill: <span className="text-[#eff1f6]">{f.skillName}</span>
+                      Skill: <span className="text-[#111827] font-semibold">{f.skillName}</span>
                     </div>
                     <div>
-                      Confidence: <span className="text-[#ffa116]">{f.confidence}</span>
+                      Confidence: <span className="text-black font-semibold">{f.confidence}</span>
                     </div>
                   </div>
 
-                  <div className="p-2.5 rounded bg-[#1a1a1a] border border-[#333333] text-xs space-y-1">
-                    <div className="text-[10px] font-mono uppercase text-[#9ca3af]">Observed Root Cause:</div>
-                    <p className="text-[#eff1f6] text-[11px]">{f.observedFactor}</p>
+                  <div className="p-2.5 rounded bg-[#f9fafb] border border-[#e5e7eb] text-xs space-y-1">
+                    <div className="text-[10px] font-mono uppercase font-bold text-[#6b7280]">Observed Root Cause:</div>
+                    <p className="text-[#111827] text-[11px]">{f.observedFactor}</p>
                   </div>
 
-                  <div className="p-2.5 rounded bg-[#202020] border border-[#2cbb5d]/30 text-xs space-y-1">
-                    <div className="text-[10px] font-mono uppercase text-[#2cbb5d]">Adaptive Recovery Action:</div>
-                    <p className="text-[#eff1f6] text-[11px]">{f.recommendedRecoveryAction}</p>
+                  <div className="p-2.5 rounded bg-[#ecfdf5] border border-[#a7f3d0] text-xs space-y-1">
+                    <div className="text-[10px] font-mono uppercase font-bold text-[#059669]">Adaptive Recovery Action:</div>
+                    <p className="text-[#065f46] text-[11px] font-medium">{f.recommendedRecoveryAction}</p>
                   </div>
                 </div>
               ))}
@@ -157,35 +157,35 @@ export const FailuresSuccessesPage: React.FC = () => {
         </div>
 
         {/* Successes Column */}
-        <div className="bg-[#262626] border border-[#333333] rounded overflow-hidden">
-          <div className="px-4 py-2.5 border-b border-[#333333] flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#eff1f6] flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#2cbb5d]" />
+        <div className="bg-white border border-[#e5e7eb] rounded overflow-hidden shadow-sm">
+          <div className="px-4 py-2.5 border-b border-[#e5e7eb] flex items-center justify-between bg-[#f9fafb]">
+            <span className="text-xs font-bold text-[#111827] flex items-center gap-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#059669]" />
               Success Intelligence & Repeatable Patterns
             </span>
-            <span className="text-[11px] font-mono text-[#9ca3af]">{successes.length} recorded</span>
+            <span className="text-[11px] font-mono text-[#6b7280]">{successes.length} recorded</span>
           </div>
 
           {successes.length === 0 ? (
-            <p className="text-xs text-[#9ca3af] p-8 text-center font-mono">
+            <p className="text-xs text-[#6b7280] p-8 text-center font-mono">
               No milestones recorded yet. Complete tasks or mock assessments.
             </p>
           ) : (
-            <div className="divide-y divide-[#333333]">
+            <div className="divide-y divide-[#e5e7eb]">
               {successes.map((s) => (
-                <div key={s.id} className="p-4 hover:bg-[#2e2e2e] transition-colors space-y-2.5">
+                <div key={s.id} className="p-4 hover:bg-[#f9fafb] transition-colors space-y-2.5">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-[#eff1f6]">{s.title}</span>
-                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded text-[#2cbb5d] bg-[#2cbb5d]/10 border border-[#2cbb5d]/30">
+                    <span className="text-xs font-bold text-[#111827]">{s.title}</span>
+                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded text-[#059669] bg-[#ecfdf5] border border-[#a7f3d0]">
                       Score: {s.score}%
                     </span>
                   </div>
 
-                  <p className="text-xs text-[#9ca3af]">{s.context}</p>
+                  <p className="text-xs text-[#4b5563]">{s.context}</p>
 
-                  <div className="p-2.5 rounded bg-[#1a1a1a] border border-[#333333] text-xs space-y-1">
-                    <div className="text-[10px] font-mono uppercase text-[#ffa116]">Contributing Factor:</div>
-                    <p className="text-[#eff1f6] text-[11px]">{s.contributingFactors}</p>
+                  <div className="p-2.5 rounded bg-[#f9fafb] border border-[#e5e7eb] text-xs space-y-1">
+                    <div className="text-[10px] font-mono uppercase font-bold text-black">Contributing Factor:</div>
+                    <p className="text-[#111827] text-[11px]">{s.contributingFactors}</p>
                   </div>
                 </div>
               ))}
@@ -196,34 +196,34 @@ export const FailuresSuccessesPage: React.FC = () => {
 
       {/* Log Failure Modal */}
       {showLogModal && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
-          <div className="bg-[#262626] border border-[#333333] p-5 rounded max-w-md w-full space-y-4 shadow-2xl">
-            <div className="border-b border-[#333333] pb-2">
-              <h3 className="text-xs font-semibold text-[#eff1f6]">Log Assessment Failure (Closed-Loop Trigger)</h3>
-              <p className="text-[11px] text-[#9ca3af] mt-0.5">
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50">
+          <div className="bg-white border border-[#e5e7eb] p-5 rounded max-w-md w-full space-y-4 shadow-xl">
+            <div className="border-b border-[#e5e7eb] pb-2">
+              <h3 className="text-xs font-bold text-[#111827]">Log Assessment Failure (Closed-Loop Trigger)</h3>
+              <p className="text-[11px] text-[#6b7280] mt-0.5">
                 Simulating a failure causes the Adaptive Replanner to inject remediation modules.
               </p>
             </div>
 
             <form onSubmit={handleRecordFailure} className="space-y-3">
               <div>
-                <label className="text-[11px] font-mono text-[#9ca3af] block mb-1">Assessment Context</label>
+                <label className="text-[11px] font-mono font-semibold text-[#6b7280] block mb-1">Assessment Context</label>
                 <input
                   type="text"
                   required
                   value={context}
                   onChange={(e) => setContext(e.target.value)}
-                  className="w-full bg-[#1a1a1a] border border-[#333333] rounded px-3 py-1.5 text-xs text-[#eff1f6] focus:outline-none focus:border-[#ffa116]"
+                  className="w-full bg-[#f9fafb] border border-[#d1d5db] rounded px-3 py-1.5 text-xs text-[#111827] focus:outline-none focus:border-black"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-[11px] font-mono text-[#9ca3af] block mb-1">Affected Skill</label>
+                  <label className="text-[11px] font-mono font-semibold text-[#6b7280] block mb-1">Affected Skill</label>
                   <select
                     value={skillId}
                     onChange={(e) => setSkillId(e.target.value ? Number(e.target.value) : '')}
-                    className="w-full bg-[#1a1a1a] border border-[#333333] rounded px-3 py-1.5 text-xs text-[#eff1f6] focus:outline-none focus:border-[#ffa116]"
+                    className="w-full bg-[#f9fafb] border border-[#d1d5db] rounded px-3 py-1.5 text-xs text-[#111827] focus:outline-none focus:border-black"
                   >
                     {skills.map((s) => (
                       <option key={s.id} value={s.id}>{s.name}</option>
@@ -232,25 +232,25 @@ export const FailuresSuccessesPage: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="text-[11px] font-mono text-[#9ca3af] block mb-1">Score ({score}%)</label>
+                  <label className="text-[11px] font-mono font-semibold text-[#6b7280] block mb-1">Score ({score}%)</label>
                   <input
                     type="number"
                     min="0"
                     max="100"
                     value={score}
                     onChange={(e) => setScore(Number(e.target.value))}
-                    className="w-full bg-[#1a1a1a] border border-[#333333] rounded px-3 py-1.5 text-xs text-[#eff1f6] focus:outline-none focus:border-[#ffa116]"
+                    className="w-full bg-[#f9fafb] border border-[#d1d5db] rounded px-3 py-1.5 text-xs text-[#111827] focus:outline-none focus:border-black"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-[11px] font-mono text-[#9ca3af] block mb-1">Observed Evidence / Deficit</label>
+                <label className="text-[11px] font-mono font-semibold text-[#6b7280] block mb-1">Observed Evidence / Deficit</label>
                 <textarea
                   rows={2}
                   value={evidence}
                   onChange={(e) => setEvidence(e.target.value)}
-                  className="w-full bg-[#1a1a1a] border border-[#333333] rounded px-3 py-1.5 text-xs text-[#eff1f6] focus:outline-none focus:border-[#ffa116]"
+                  className="w-full bg-[#f9fafb] border border-[#d1d5db] rounded px-3 py-1.5 text-xs text-[#111827] focus:outline-none focus:border-black"
                 />
               </div>
 
@@ -258,14 +258,14 @@ export const FailuresSuccessesPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowLogModal(false)}
-                  className="flex-1 py-1.5 rounded bg-[#333333] hover:bg-[#3d3d3d] text-[#eff1f6] text-xs font-medium transition-colors"
+                  className="flex-1 py-1.5 rounded bg-[#f3f4f6] hover:bg-[#e5e7eb] text-[#111827] text-xs font-semibold"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="flex-1 py-1.5 rounded bg-[#ffa116] hover:bg-[#ffb03a] text-black text-xs font-semibold transition-colors disabled:opacity-50"
+                  className="flex-1 py-1.5 rounded bg-black hover:bg-neutral-800 text-white text-xs font-semibold shadow-sm disabled:opacity-50"
                 >
                   {submitting ? 'Triggering...' : 'Record & Adapt'}
                 </button>
